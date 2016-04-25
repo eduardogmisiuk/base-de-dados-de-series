@@ -5,6 +5,8 @@
 *.elf
 
 *.xoj
+*.in
+*.log
 
 # Precompiled Headers
 *.gch
