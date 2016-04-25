@@ -31,12 +31,12 @@ Gênero da série.
 Tipo: char * de tamanho variável. Como pode-se juntar gêneros para criar algo mais específico para cada série, é preferível utilizar um campo
 de tamanho variável.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    int        char*       char*       char*         short         char         char                          
+    int      char*       short int        char        char*        char*        char*                         
 ------------------------------------------------------------------------------------------
-| 4 bytes |   n bytes   |  m bytes  | 60 bytes |    2 bytes    |   1 byte  |   x bytes   ǁ
-| idSerie | tituloSerie | descSerie | producao | anoLancamento | temporada | generoSerie ǁ
+| 4 bytes | 60 bytes |    2 bytes    |   1 byte  |   n bytes   |  m bytes  |   x bytes   ǁ
+| idSerie | producao | anoLancamento | temporada | tituloSerie | descSerie | generoSerie ǁ
 ------------------------------------------------------------------------------------------
 
 Separador de campos: | (número 179)
 Terminador de registro: ǁ (número 186)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
