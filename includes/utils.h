@@ -16,6 +16,8 @@
 #define SIZE_RANDOM_SERIES 3
 #define RANDOM_LIMIT 1000
 
+#define DB_FILE_NAME "series/series.db"
+
 char *str_read (FILE *f, char d1, char d2, char d3, char d4);
 
 #endif

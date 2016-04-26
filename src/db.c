@@ -70,6 +70,8 @@ int create_file (const char *name, SERIES_DATABASE **db) {
 	(*db)->s = NULL;
 	(*db)->file = NULL;
 
+	(*db)->n_series = 0;
+
 	return 0;
 }
 
@@ -104,24 +106,39 @@ int destroy_file (SERIES_DATABASE **db) {
 }
 
 int generate_random_file (SERIES_DATABASE *db) {
+	if (db == NULL) return 1;
+
 	// Arquivo .txt com várias séries a serem adicionadas;
-	FILE *random_series = fopen (RANDOM_SERIES, "r");
+	FILE *random_series = NULL;
 	// Vetor utilizado para a "randomização" dos IDs das séries;
-	char *used = (char *) calloc (RANDOM_LIMIT, sizeof (char));
+	char *used = NULL;
+	SERIE **series = NULL;
 	int i;
 	int random;
 	char field_delimiter = FIELD_SEPARATOR;
 	char record_delimiter = REGISTER_SEPARATOR;
-
-	SERIE **series = (SERIE **) malloc (SIZE_RANDOM_SERIES*sizeof (SERIE *));
 	// Ponteiro para auxiliar no swap entre os registros;
 	SERIE *aux = NULL;
 	char *prod_aux = NULL;
 
+	// Alocando memória para o vetor utilizado para aleatorizar os IDs;
+	used = (char *) calloc (RANDOM_LIMIT, sizeof (char));
+	if (used == NULL) return 2;
+
+	// Abrindo o arquivo em que há dados das séries;
+	random_series = fopen (RANDOM_SERIES, "r");
+	if (random_series == NULL) return 3;
+
+	// Alocando memória para o vetor de informações de séries;
+	series = (SERIE **) malloc (SIZE_RANDOM_SERIES*sizeof (SERIE *));
+	if (series == NULL) return 4;
+
+	// "Setando" uma seed para números aleatórios;
 	srand (time (NULL));
 
 	// Arquivo que armazenará as séries aleatoriamente ordenadas do arquivo .txt acima;
 	db->file = fopen (db->name, "w+");
+	if (db->file == NULL) return 3;
 
 	for (i = 0; i < SIZE_RANDOM_SERIES; i++) {
 
@@ -176,15 +193,22 @@ int generate_random_file (SERIES_DATABASE *db) {
 	for (i = 0; i < SIZE_RANDOM_SERIES; i++) {
 
 		fwrite (&(series[i]->idSerie), ID_SIZE, 1, db->file);
+
 		fwrite (series[i]->producao, PRODUCAO_SIZE, 1, db->file);
+
 		fwrite (&(series[i]->anoLancamento), ANO_SIZE, 1, db->file);
+
 		fwrite (&(series[i]->temporada), TEMPORADA_SIZE, 1, db->file);
+
 		fwrite (series[i]->tituloSerie, series[i]->titulo_size, 1, db->file);
 		fwrite (&field_delimiter, sizeof (char), 1, db->file);
+
 		fwrite (series[i]->descSerie, series[i]->desc_size, 1, db->file);
 		fwrite (&field_delimiter, sizeof (char), 1, db->file);
+
 		fwrite (series[i]->generoSerie, series[i]->genero_size, 1, db->file);
 		fwrite (&field_delimiter, sizeof (char), 1, db->file);
+
 		fwrite (&record_delimiter, sizeof (char), 1, db->file);
 
 		free (series[i]->producao);
@@ -193,12 +217,16 @@ int generate_random_file (SERIES_DATABASE *db) {
 		free (series[i]->generoSerie);
 		free (series[i]);
 
-	}
-	free (series);
+		// Atualizando o número de séries dentro do arquivo;
+		db->n_series++;
 
+	}
+
+	free (series);
 	free (used);
 
 	fclose (random_series);
+
 	fclose (db->file);
 	db->file = NULL;
 
