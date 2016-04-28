@@ -7,7 +7,8 @@
 int main (int argc, char *argv[]) {
 	SERIES_DATABASE *db = NULL;
 	char opt = 1;
-
+	int i, aux; //contador , auxiliar na leitura do retorno da busca de uma serie
+	
 	// Inicializando o arquivo;
 	create_file (DB_FILE_NAME, &db);
 
@@ -40,6 +41,40 @@ int main (int argc, char *argv[]) {
 				// de feita a busca.
 				// Utilizar o retorno da função para retornar erros somente. Trate-os aqui na main.
 				// Organize a impressão do jeito que achar melhor.
+				aux = searchSeries(db);
+				if(aux == -1)
+				{
+					fprintf(stderr, "A serie nao esta no banco de dados!");
+				}
+				else if(aux == -2)
+				{
+					fprintf(stderr,"O registro de series esta vazio!");
+				}
+				else
+				{
+					printf("Nome: ");
+					for(i = 0; i < db->s[aux].titulo_size; i++)
+						printf("%c",db->s[aux].tituloSerie);
+					printf("\n");
+					
+					printf("Descricao: ");
+					for(i = 0; i < db->s[aux].desc_size; i++)
+						printf("%c", db->s[aux].descSerie);
+					printf("\n");
+					
+					printf("Genero: ");
+					for(i = 0; i < db->s[aux].genero_size; i++)
+						printf("%c", db->s[i].generoSerie);
+					printf("\n");
+					
+					printf("Producao: ");
+						printf("%s\n", db->s[i].producao);
+						
+					printf("Ano de Lancamento: %d", db->s[aux].anoLancamento);
+					
+					printf("Numero de Temporadas: %c", db->s[aux].temporada);
+							
+				}
 				break;
 
 			case 3:

@@ -110,6 +110,30 @@ int destroy_file (SERIES_DATABASE **db) {
 	return 0;
 }
 
+int searchSeries(SERIES_DATABASE* db)
+{
+	if(db->s != NULL)
+	{
+		int id;
+		int i;
+		int nSeries = db->n_series;
+		scanf("%d", &id);
+		fgetc();
+		for(i = 0; i < nSeries; i++)
+		{
+			if(db->s->idSerie == id)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	return -2;
+}
+
+
+
+
 int generate_random_file (SERIES_DATABASE *db) {
 	// Arquivo .txt com várias séries a serem adicionadas;
 	FILE *random_series = fopen (RANDOM_SERIES, "r");
