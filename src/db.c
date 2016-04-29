@@ -5,6 +5,11 @@
 #include "db.h"
 #include "utils.h"
 
+/**
+ *
+ *
+ *
+ */
 typedef struct INDEX {
 	// Nome do arquivo de índice;
 	char *name;
@@ -14,6 +19,11 @@ typedef struct INDEX {
 	int n_index;
 } INDEX;
 
+/**
+ *
+ *
+ *
+ */
 struct SERIES_DATABASE {
 	// Nome do arquivo de base de dados;
 	char *name;
@@ -24,17 +34,23 @@ struct SERIES_DATABASE {
 	int n_series;
 };
 
-/* Dados dentro do arquivo de base de dados */
+/**
+ * Dados dentro do arquivo de base de dados
+ *
+ *
+ */
 struct SERIE {
 	// Identificador único de cada série;
 	int idSerie;
 
 	// Título;
 	char *tituloSerie;
+	// Tamanho;
 	int titulo_size;
 
 	// Descrição;
 	char *descSerie;
+	// Tamanho;
 	int desc_size;
 
 	// País de origem;
@@ -48,10 +64,15 @@ struct SERIE {
 
 	// Gênero;
 	char *generoSerie;
+	// Tamanho;
 	int genero_size;
 };
 
-
+/**
+ *
+ *
+ *
+ */
 int create_file (const char *name, SERIES_DATABASE **db) {
 	if (name == NULL){
 		fprintf(stderr,"Digite um nome valido!\n");
@@ -79,11 +100,17 @@ int create_file (const char *name, SERIES_DATABASE **db) {
 	return 0;
 }
 
-int destroy_file (SERIES_DATABASE **db) {
+/**
+ *
+ *
+ *
+ */
+void destroy_file (SERIES_DATABASE **db) {
 	if (db != NULL && *db != NULL) {
 
 		// Liberando memória que tenha sido alocada;
 		if ((*db)->name != NULL) free ((*db)->name);
+		// Caso tenha algum dado na struct SERIE, será desalocada aqui;
 		if ((*db)->s != NULL) {
 
 			if ((*db)->s->tituloSerie != NULL) free ((*db)->s->tituloSerie);
@@ -93,23 +120,23 @@ int destroy_file (SERIES_DATABASE **db) {
 
 		}
 
+		// Caso o arquivo esteja aberto, vamos fechá-lo;
 		if ((*db)->file != NULL) fclose ((*db)->file);
 
+		// Liberando toda a estrutura;
 		free (*db);
 		*db = NULL;
 
 	}
-
-	// TODO
-	else {
-		
-		
-
-	}
-
-	return 0;
 }
 
+/**
+ * Busca um registro com o ID passado pelo usuário.
+ *
+ * db - arquivo da base de dados.
+ *
+ * Autor: Raul (TODO: complete o seu nome aqui).
+ */
 int searchSeries(SERIES_DATABASE* db)
 {
 	if(db->s != NULL)
@@ -118,7 +145,7 @@ int searchSeries(SERIES_DATABASE* db)
 		int i;
 		int nSeries = db->n_series;
 		scanf("%d", &id);
-		fgetc();
+		fgetc(stdin);
 		for(i = 0; i < nSeries; i++)
 		{
 			if(db->s->idSerie == id)
@@ -131,29 +158,66 @@ int searchSeries(SERIES_DATABASE* db)
 	return -2;
 }
 
-
-
-
+/**
+ * Cria um arquivo com 100 registros de séries totalmente aleatório.
+ *
+ * db - arquivo da base de dados.
+ *
+ * Retorno:
+ * 0 - sucesso na geração;
+ * 1 - Erro de alocação de memória;
+ * 2 - Erro na abertura de arquivo;
+ *
+ * Autor: Allan Silva Domingues e Eduardo Garcia Misiuk.
+ */
 int generate_random_file (SERIES_DATABASE *db) {
 	// Arquivo .txt com várias séries a serem adicionadas;
 	FILE *random_series = fopen (RANDOM_SERIES, "r");
-	// Vetor utilizado para a "randomização" dos IDs das séries;
+	if (random_series == NULL) return 2;
+	// Vetor utilizado para a "randomização" dos IDs das séries.
+	// Quando colocar em uma posição aleatória o registro, vou nesta posição neste vetor e marco como utilizada,
+	// para não sobrescrever nenhum dado e manter realmente aleatorizado;;
 	char *used = (char *) calloc (RANDOM_LIMIT, sizeof (char));
-	int i;
-	int random;
-	char field_delimiter = FIELD_SEPARATOR;
-	char record_delimiter = REGISTER_SEPARATOR;
-
+	if (used == NULL) {
+		fclose (random_series);
+		random_series = NULL;
+		return 1;
+	}
+	int i, j; // Contador;
+	int random; // Número aleatório;
+	char field_delimiter = FIELD_SEPARATOR; // Delimitador de campos;
+	char record_delimiter = REGISTER_SEPARATOR; // Delimitador de registros;
+	// Vetor com as séries;
 	SERIE **series = (SERIE **) malloc (SIZE_RANDOM_SERIES*sizeof (SERIE *));
+	if (series == NULL) {
+		fclose (random_series);
+		random_series = NULL;
+		free (used);
+		used = NULL;
+		return 1;
+	}
 	// Ponteiro para auxiliar no swap entre os registros;
 	SERIE *aux = NULL;
+	// Para evitar um warning durante a execução do programa (ele fala que está adicionando valores não
+	// inicializados no arquivo), usaremos este vetor para já inicializar todas as 60 posições do vetor como 0;
 	char *prod_aux = NULL;
 
+	// Inicializando a seed dos números aleatórios;
 	srand (time (NULL));
 
 	// Arquivo que armazenará as séries aleatoriamente ordenadas do arquivo .txt acima;
 	db->file = fopen (db->name, "w+");
+	if (db->file == NULL) {
+		fclose (random_series);
+		random_series = NULL;
+		free (used);
+		used = NULL;
+		free (series);
+		series = NULL;
+		return 2;
+	}
 
+	// Leitura das séries que estão no arquivo .txt;
 	for (i = 0; i < SIZE_RANDOM_SERIES; i++) {
 
 		// Alocando memória para a série que será lida;
@@ -161,6 +225,7 @@ int generate_random_file (SERIES_DATABASE *db) {
 
 		// Lendo o país de origem da série;
 		series[i]->producao = str_read (random_series, '\0', '\n', -1, -1);
+		// Realizando a inicialização do vetor para suprimir o warning, como explicado acima;
 		prod_aux = (char *) calloc (60, sizeof (char));
 		strcpy (prod_aux, series[i]->producao);
 		free (series[i]->producao);
@@ -192,6 +257,7 @@ int generate_random_file (SERIES_DATABASE *db) {
 
 	}
 
+	// Aleatorizando a posição das séries;
 	for (i = 0; i < SIZE_RANDOM_SERIES; i++) {
 
 		// Pegando uma posição aleatória no vetor;
@@ -204,18 +270,37 @@ int generate_random_file (SERIES_DATABASE *db) {
 
 	}
 
+	// Adicionando ao arquivo as séries;
 	for (i = 0; i < SIZE_RANDOM_SERIES; i++) {
 
+		// ID;
 		fwrite (&(series[i]->idSerie), ID_SIZE, 1, db->file);
+
+		// País de origem;
 		fwrite (series[i]->producao, PRODUCAO_SIZE, 1, db->file);
+
+		// Ano de lançamento;
 		fwrite (&(series[i]->anoLancamento), ANO_SIZE, 1, db->file);
+
+		// Número de temporadas;
 		fwrite (&(series[i]->temporada), TEMPORADA_SIZE, 1, db->file);
+
+		// Título;
 		fwrite (series[i]->tituloSerie, series[i]->titulo_size, 1, db->file);
+		// Delimitador de campos;
 		fwrite (&field_delimiter, sizeof (char), 1, db->file);
+
+		// Descrição;
 		fwrite (series[i]->descSerie, series[i]->desc_size, 1, db->file);
+		// Delimitador de campos;
 		fwrite (&field_delimiter, sizeof (char), 1, db->file);
+
+		// Gênero;
 		fwrite (series[i]->generoSerie, series[i]->genero_size, 1, db->file);
+		// Delimitador de campos;
 		fwrite (&field_delimiter, sizeof (char), 1, db->file);
+
+		// Delimitador de registros;
 		fwrite (&record_delimiter, sizeof (char), 1, db->file);
 
 		free (series[i]->producao);
@@ -225,6 +310,7 @@ int generate_random_file (SERIES_DATABASE *db) {
 		free (series[i]);
 
 	}
+
 	free (series);
 
 	free (used);
