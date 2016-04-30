@@ -1,18 +1,101 @@
-Estados Unidos da América
-2013
-3
-Orange is the New Black
-Uma privilegiada garota de Nova York acaba na prisão por um crime cometido anos atrás. Série vencedora do Emmy, da mesma criadora de "Weeds".
-Comédia
-Estados Unidos da América
-2013
-4
-House of Cards
-Frank Underwood, um congressista inescrupuloso, é implacável em sua busca pelo poder nesta instigante série política.
-Drama
-Estados Unidos da América
-2015
-2
-Demolidor
-Cego desde pequeno, Matt Murdock luta contra a injustiça durante o dia como advogado e à noite nas ruas de Hell’s Kitchen, Nova York.
-Ação
+Game of Thrones	While a civil war brews between several noble families in Westeros, the children of the former rulers of the land attempt to rise up to power. Meanwhile a forgotten race, bent on destruction, return after thousands of years in the North.	USA	2011	7	
+Vikings	The world of the Vikings is brought to life through the journey of Ragnar Lothbrok, the first Viking to emerge from Norse legend and onto the pages of history - a man on the edge of myth.	Ireland	2013	5	
+The Flash	Barry Allen wakes up 9 months after he was struck by lightning and discovers that the bolt gave him the power of super speed. With his new team and powers, Barry becomes "The Flash" and fights crime in Central City.	USA	2014	3	
+The Walking Dead	Sheriff Deputy Rick Grimes leads a group of survivors in a world overrun by the walking dead. Fighting the dead, fearing the living.	USA	2010	7	
+Unbreakable Kimmy Schmidt	A woman is rescued from a doomsday cult and starts life over again in New York City.	USA	2015	3	
+Better Call Saul	The trials and tribulations of criminal lawyer, Jimmy McGill, in the time leading up to establishing his strip-mall law office in Albuquerque, New Mexico.	USA	2015	3	
+Outlander	Follows the story of Claire Randall, a married combat nurse from 1945 who is mysteriously swept back in time to 1743, where she is immediately thrown into an unknown world where her life is...	USA	2014	2	
+Arrow	Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.	USA	2012	5	
+The Blacklist	Elizabeth 'Liz' Keen, a new FBI profiler has her entire life uprooted when a mysterious criminal, Raymond Reddington, on the FBI's Top Ten Most Wanted List turns himself in and insists on speaking to her.	USA	2013	4	
+Gotham	The story behind Detective James Gordon's rise to prominence in Gotham City in the years before Batman's arrival.	USA	2014	3	
+Fear the Walking Dead	What did the world look like as it was transforming into the horrifying apocalypse depicted in	USA	2015	3	
+Daredevil	Matt Murdock, with his other senses superhumanly enhanced, fights crime as a blind Lawyer by day, and vigilante by night.	USA	2015	2	
+Grey's Anatomy	A drama centered on the personal and professional lives of five surgical interns and their supervisors.	USA	2005	13	
+The 100	Set 97 years after a nuclear war has destroyed civilization, when a spaceship housing humanity's lone survivors sends 100 juvenile delinquents back to Earth in hopes of possibly re-populating the planet.	USA	2014	4	
+Supernatural	Two brothers follow their father's footsteps as "hunters" fighting evil supernatural beings of many kinds including monsters, demons, and gods that roam the earth.	USA	2005	12	
+The Big Bang Theory	A woman who moves into an apartment across the hall from two brilliant but socially awkward physicists shows them how little they know about life outside of the laboratory.	USA	2007	10	
+Once Upon a Time	A young woman with a troubled past is drawn to a small town in Maine where fairy tales are to be believed.	USA	2011	6	
+Supergirl	The adventures of Superman's cousin in her own superhero career.	USA	2015	1	
+Lucifer	Satan takes up residence in Los Angeles.	USA	2015	2	
+Agents of S.H.I.E.L.D.	The missions of the Strategic Homeland Intervention, Enforcement and Logistics Division.	USA	2013	4	
+House of Cards	A Congressman works with his equally conniving wife to exact revenge on the people who betrayed him.	USA	2013	5	
+Containment	The series follows an epidemic that breaks out in Atlanta, leaving the large city quarantined and those stuck on the inside fighting for their lives. The drama tells the story of loved ones...	USA	2016	1	
+Legends of Tomorrow	Focuses on time-traveling rogue Rip Hunter, who has to recruit a rag-tag team of heroes and villains to help prevent an apocalypse that could impact not only Earth, but all of time.	USA	2016	2	
+Breaking Bad	A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine, with his former student, in order to secure his family's financial future.	USA	2008	5	
+Banshee	Lucas Hood (Antony Starr), an ex-con and master thief assumes the identity of a murdered sheriff where he continues his criminal activities. His past seems to haunt him by those he betrayed...	USA	2013	4	
+Criminal Minds	The cases of the FBI Behavioral Analysis Unit (BAU), an elite group of profilers who analyze the nation's most dangerous serial killers and individual heinous crimes in an effort to anticipate their next moves before they strike again.	USA	2005	11	
+The Vampire Diaries	A teenage girl is torn between two vampire brothers.	USA	2009	8	
+Vinyl	A New York music executive in the 1970s hustles to make a career out of the city's diverse music scene.	USA	2016	2	
+The Ranch	The son of a Colorado rancher returns home from a semi-pro football career to run the family business.	USA	2016	2	
+Girls	A comedy about the experiences of a group of girls in their early 20s.	USA	2012	6	
+Castle	After a serial killer imitates the plots of his novels, successful mystery novelist Richard "Rick" Castle receives permission from the Mayor of New York City to tag along with an NYPD homicide investigation team for research purposes.	USA	2009	8	
+NCIS: Naval Criminal Investigative Service	The cases of the Naval Criminal Investigative Service's Washington DC Major Case Response Team, led by Special Agent Leroy Jethro Gibbs.	USA	2003	15	
+Suits	On the run from a drug deal gone bad, Mike Ross, a brilliant college-dropout, finds himself a job working with Harvey Specter, one of New York City's best lawyers.	USA	2011	6	
+Modern Family	Three different, but related families face trials and tribulations in their own uniquely comedic ways.	USA	2009	8	
+Billions	U.S. Attorney Chuck Rhoades goes after hedge fund king, Bobby "Axe" Axelrod in a battle between two powerful New York figures.	USA	2016	2	
+New Girl	After a bad break-up, Jess, an offbeat young woman, moves into an apartment loft with three single men. Although they find her behavior very unusual, the men support her - most of the time.	USA	2011	6	
+Quantico	A look at the lives of young FBI recruits training at the Quantico base in Virginia when one of them is suspected of being a sleeper terrorist.	USA	2015	2	
+Blindspot	A Jane Doe is found in Times Square with no memory and mysterious tattoos on her body.	USA	2015	2	
+Orange Is the New Black	The story of Piper Chapman, a woman in her thirties who is sentenced to fifteen months in prison after being convicted of a decade-old crime of transporting money to her drug-dealing girlfriend.	USA	2013	7	
+American Crime Story	An anthology series centered around some of history's most famous criminals.	USA	2016	2	
+The Girlfriend Experience	TV series based on Steven Soderbergh's "The Girlfriend Experience", which centered on the life of a New York call girl.	USA	2016	1	
+Sherlock	A modern update finds the famous sleuth and his doctor partner solving crime in 21st century London.	UK	2010	4	
+Friends	Follows the lives of six 20-something friends living in Manhattan.	USA	1994	10	
+Orphan Black	A streetwise hustler is pulled into a compelling conspiracy after witnessing the suicide of a girl who looks just like her.	Canada	2013	4	
+Shameless	An alcoholic man lives in a perpetual stupor while his six children with whom he lives cope as best they can.	USA	2011	7	
+American Horror Story	An anthology series that centers on different characters and locations, including a house with a murderous past, an insane asylum, a witch coven, a freak show, and an enigmatic hotel.	USA	2011	6	
+Limitless	An average 28-year old man that gains the ability to use the full extent of his brain's capabilities is hired by the FBI as a consultant. A television follow-up of the film	USA	2015	1	
+The Catch	Follows a female private investigator whose career specialty is exposing fraud for a living.	USA	2016	1	
+Empire	A hip-hop mogul must choose between his three sons who are battling for control over his multi-million dollar company, while his ex-wife schemes to get what's hers.	USA	2015	3	
+Pretty Little Liars	Four friends band together against an anonymous foe who threatens to reveal their darkest secrets, while unraveling the mystery of the murder of their best friend.	USA	2010	7	
+The Good Wife	Alicia has been a good wife to her husband, a former state's attorney. After a very humiliating sex and corruption scandal, he is behind bars. She must now provide for her family and returns to work as a litigator in a law firm.	USA	2009	7	
+How to Get Away with Murder	A group of ambitious law students and their brilliant criminal defense professor become involved in a twisted murder plot that promises to change the course of their lives.	USA	2014	3	
+Sons of Anarchy	A man in his early 30s struggles to find a balance in his life between being a new dad and his involvement in a motorcycle club.	USA	2008	7	
+Bones	A forensic anthropologist and a cocky FBI agent build a team to investigate death causes. And quite often, there isn't more to examine than rotten flesh or mere bones.	USA	2005	12	
+Brooklyn Nine-Nine	Jake Peralta, an immature but talented NYPD detective in Brooklyn's 99th Precinct, comes into immediate conflict with his new commanding officer, the serious and stern Captain Ray Holt.	USA	2013	4	
+Black Sails	Captain Flint and his pirates, twenty years prior to Robert Louis Stevenson's classic "Treasure Island".	USA	2014	4	
+The Originals	A family of power-hungry thousand year old vampires look to take back the city that they built and dominate all those who have done them wrong.	USA	2013	4	
+Bates Motel	Centers on a mother and son who come to a new town so that they can start over and set up a new business, but a lot of mysterious incidents happen, including the unanswered and horrible acts of the son.	USA	2013	5	
+Mr. Robot	Follows a young computer programmer who suffers from social anxiety disorder and forms connections through hacking. He's recruited by a mysterious anarchist, who calls himself Mr. Robot.	USA	2015	2	
+Archer	At ISIS, no one ever shuts up. Covert black ops and espionage take a back seat to zany personalities and relationships between the secret agents and drones.	USA	2009	7	
+Person of Interest	An ex-assassin and a wealthy programmer save lives via a surveillance AI that sends them the identities of civilians involved in impending crimes. However, the details of the crimes--including the civilians' roles--are left a mystery.	USA	2011	5	
+Prison Break	Due to a political conspiracy, an innocent man is sent to death row and his only hope is his brother, who makes it his mission to deliberately get himself sent to the same prison in order to break the both of them out, from the inside out.	USA	2005	4	
+The Office	A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium. Based on the hit BBC series.	USA	2005	9	
+Doctor Who	The further adventures of the time traveling alien adventurer and his companions.	UK	2005	10	
+Hawaii Five-0	Steve McGarrett returns home to Oahu, in order to find his father's killer. The governor offers him the chance to run his own task force (Five-0). Steve's team is joined by Chin Ho Kelly, Danny "Danno" Williams, and Kono Kalakaua.	USA	2010	7	
+The X Files	Two FBI agents, Fox Mulder the believer and Dana Scully the skeptic, investigate the strange and unexplained while hidden forces work to impede their efforts.	Canada	1993	10	
+Jessica Jones	A former superhero decides to reboot her life by becoming a private investigator.	USA	2015	2	
+Grimm	A homicide detective discovers he is a descendant of hunters who fight supernatural forces.	USA	2011	6	
+Downton Abbey	A chronicle of the lives of the British aristocratic Crawley family and their servants in the early 20th Century.	UK	2010	6	
+How I Met Your Mother	A father recounts to his children, through a series of flashbacks, the journey he and his four best friends took leading up to him meeting their mother.	USA	2005	9	
+The Magicians	After being recruited to a secretive academy, a group of students discover that the magic they read about as children is very real-and more dangerous than they ever imagined.	USA	2015	2	
+Gilmore Girls	A drama centering around the relationship between a thirtysomething single mother and her teen daughter living in Stars Hollow, Connecticut.	USA	2000	7	
+Law & Order: Special Victims Unit	This show introduces the Special Victims Unit, a new elite squad of NYPD detectives who investigate sexually related crimes.	USA	1999	17	
+Everybody Loves Raymond	The comical everyday life of a successful sports columnist and his dysfunctional family.	USA	1996	9	
+The Americans	Two Soviet intelligence agents pose as a married couple to spy on the American government.	USA	2013	4	
+Homeland	A bipolar CIA operative becomes convinced a prisoner of war has been turned by al-Qaeda and is planning to carry out a terrorist attack on American soil.	USA	2011	6	
+The Path	A man who converts to a controversial following suffers from a crisis of faith.	USA	2016	1	
+Scandal	A former White House Communications Director starts her own crisis management firm only to realize her clients are not the only ones with secrets.	USA	2012	6	
+Peaky Blinders	A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby, who means to move up in the world.	UK	2013	3	
+Elementary	A modern take on the cases of Sherlock Holmes, with the detective now living in New York City.	USA	2012	5	
+Dexter	Dexter Morgan is a Forensics Expert, a loyal brother, boyfriend, and friend. That's what he seems to be, but that's not what he really is. Dexter Morgan is a Serial Killer that hunts the bad.	USA	2006	8	
+House M.D.	An antisocial maverick doctor who specializes in diagnostic medicine does whatever it takes to solve puzzling cases that come his way using his crack team of doctors and his wits.	USA	2004	8	
+Game of Silence	A rising attorney finds his perfectly crafted life threatened when his long-lost childhood friends threaten to expose a dark secret from their past.	USA	2016	1	
+Scorpion	An eccentric genius forms an international network of super-geniuses to act as the last line of defense against the complicated threats of the modern world.	USA	2014	3	
+The Five	A mystery series created by author Harlan Coben. Jesse, a five year old boy goes missing, 20 years later his DNA shows up at a crime scene.	UK	2016	1	
+Shadowhunters	After her mother is kidnapped, Clary must venture into the dark world of demon hunting.	USA	2016	2	
+iZombie	A medical resident finds that being a zombie has its perks, which she uses to assist the police.	USA	2015	3	
+Lost	The survivors of a plane crash are forced to work together in order to survive on a seemingly deserted tropical island.	USA	2004	6	
+Z Nation	Three years after the zombie virus has gutted the United States of America a team of everyday heroes must transport the only known survivor of the plague from New York to California, where the last functioning viral lab waits for his blood.	USA	2014	3	
+Hunters	The disappearance of a decorated FBI agent's wife leads him to a secret government unit assembled to hunt a group of ruthless terrorists - shadowy figures that may or may not be from this world.	USA	2016	1	
+Fargo	Various chronicles of deception, intrigue and murder in and around frozen Minnesota. Yet all of these tales mysteriously lead back one way or another to Fargo, North Dakota	USA	2014	3	
+Teen Wolf	A somewhat awkward teen is attacked by a werewolf and inherits the curse himself, as well as the enemies that come with it.	USA	2011	6	
+Penny Dreadful	Explorer Sir Malcolm Murray, American gunslinger Ethan Chandler, scientist Victor Frankenstein and medium Vanessa Ives unite to combat supernatural threats in Victorian London.	USA	2014	3	
+True Detective	An anthology series in which police investigations unearth the personal and professional secrets of those involved, both within and outside the law.	USA	2014	2	
+Narcos	A chronicled look at the criminal exploits of Colombian drug lord Pablo Escobar.	USA	2015	2	
+That '70s Show	A comedy revolving around a group of teenage friends, their mishaps, and their coming of age, set in 1970s Wisconsin.	USA	1998	8	
+Silicon Valley	In the high-tech gold rush of modern Silicon Valley, the people most qualified to succeed are the least capable of handling success. A comedy partially inspired by Mike Judge's own ...	USA	2014	4	
+Blue Bloods	Revolves around a family of New York cops.	USA	2010	7	
+Family Guy	In a wacky Rhode Island town, a dysfunctional family strive to cope with everyday life as they are thrown from one crazy scenario to another.	USA	1999	14	
+Nashville	A fading country music star comes into conflict with a rising young star.	USA	2012	4	
+
