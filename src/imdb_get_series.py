@@ -97,11 +97,11 @@ with open ('series.txt', 'w+') as output_file:
 			seasons = (seasons.find (text=True)).strip ()
 
 			# The genres of a serie are in the same div the title is
-			genre = soup.find ('div', { 'class' : 'titleWrapper' })
+			genre = soup.find ('div', { 'class' : 'title_wrapper' })
 			# There might be more than one of them but just the first is considered
-			genre = soup.find ('a', { 'href' : re.compile ('^/genre') })
+                        genre = genre.find ('span', { 'class' : 'itemprop' }, { 'itemprop': 'genre'})
 			# Again, spaces and tabs are not a rather have
-			genre = (soup.find (text=True)).strip ()
+			genre = (genre.find (text=True)).strip ()
 
 			# Finally. all of the data gotten is printed in a file with tabs
 			# separating them
