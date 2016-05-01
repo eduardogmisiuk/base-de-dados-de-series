@@ -7,7 +7,7 @@
 int main (int argc, char *argv[]) {
 	SERIES_DATABASE *db = NULL;
 	int opt = 1;
-	int i, aux; //contador , auxiliar na leitura do retorno da busca de uma serie
+	int aux; //contador , auxiliar na leitura do retorno da busca de uma serie
 	
 	// Inicializando o arquivo;
 	create_file (DB_FILE_NAME, &db);
