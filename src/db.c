@@ -205,6 +205,7 @@ int generate_random_file (SERIES_DATABASE *db) {
 	// Para evitar um warning durante a execução do programa (ele fala que está adicionando valores não
 	// inicializados no arquivo), usaremos este vetor para já inicializar todas as 60 posições do vetor como 0;
 	char *prod_aux = NULL;
+	short int aux_temporada;
 
 	// Inicializando a seed dos números aleatórios;
 	srand (time (NULL));
@@ -228,8 +229,16 @@ int generate_random_file (SERIES_DATABASE *db) {
 		// Alocando memória para a série que será lida;
 		series[i] = (SERIE *) malloc (SIZE_RANDOM_SERIES*sizeof (SERIE));
 
+		// Lendo o nome da série;
+		series[i]->tituloSerie = str_read (random_series, '\t', -1, -1, -1);
+		series[i]->titulo_size = strlen (series[i]->tituloSerie) + 1;
+
+		// lendo a descrição da série;
+		series[i]->descSerie = str_read (random_series, '\t', -1, -1, -1);
+		series[i]->desc_size = strlen (series[i]->descSerie) + 1;
+
 		// Lendo o país de origem da série;
-		series[i]->producao = str_read (random_series, '\0', '\t', '\n', -1);
+		series[i]->producao = str_read (random_series, '\t', -1, -1, -1);
 		// Realizando a inicialização do vetor para suprimir o warning, como explicado acima;
 		prod_aux = (char *) calloc (60, sizeof (char));
 		strcpy (prod_aux, series[i]->producao);
@@ -238,18 +247,11 @@ int generate_random_file (SERIES_DATABASE *db) {
 		prod_aux = NULL;
 
 		// Lendo o ano de lançamento e o número de temporadas da série;
-		fscanf (random_series, "%hd\t%c\t", &(series[i]->anoLancamento), &(series[i]->temporada));
-
-		// Lendo o nome da série;
-		series[i]->tituloSerie = str_read (random_series, '\0', '\t', -1, -1);
-		series[i]->titulo_size = strlen (series[i]->tituloSerie) + 1;
-
-		// lendo a descrição da série;
-		series[i]->descSerie = str_read (random_series, '\0', '\t', -1, -1);
-		series[i]->desc_size = strlen (series[i]->descSerie) + 1;
+		fscanf (random_series, "%hd\t%hd\t", &(series[i]->anoLancamento), &aux_temporada);
+		series[i]->temporada = (char) aux_temporada;
 
 		// Lendo o gênero da série;
-		series[i]->generoSerie = str_read (random_series, '\0', '\t', '\n', -1);
+		series[i]->generoSerie = str_read (random_series, '\0', '\n', -1, -1);
 		series[i]->genero_size = strlen (series[i]->generoSerie) + 1;
 
 		// Pegando um valor aleatório para op ID da série lida;
