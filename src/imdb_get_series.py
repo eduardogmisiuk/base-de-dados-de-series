@@ -98,7 +98,7 @@ with open ('series.txt', 'w+') as output_file:
 
 			# The genres of a serie are in the same div the title is
 			genre = soup.find ('div', { 'class' : 'title_wrapper' })
-			# There might be more than one of them but just the first is considered
+                        # Is inside the span whose class is itemprop and whose itemprop is genre
                         genre = genre.find ('span', { 'class' : 'itemprop' }, { 'itemprop': 'genre'})
 			# Again, spaces and tabs are not a rather have
 			genre = (genre.find (text=True)).strip ()
