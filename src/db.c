@@ -229,7 +229,7 @@ int generate_random_file (SERIES_DATABASE *db) {
 		series[i] = (SERIE *) malloc (SIZE_RANDOM_SERIES*sizeof (SERIE));
 
 		// Lendo o país de origem da série;
-		series[i]->producao = str_read (random_series, '\0', '\n', -1, -1);
+		series[i]->producao = str_read (random_series, '\0', '\t', '\n', -1);
 		// Realizando a inicialização do vetor para suprimir o warning, como explicado acima;
 		prod_aux = (char *) calloc (60, sizeof (char));
 		strcpy (prod_aux, series[i]->producao);
@@ -238,18 +238,18 @@ int generate_random_file (SERIES_DATABASE *db) {
 		prod_aux = NULL;
 
 		// Lendo o ano de lançamento e o número de temporadas da série;
-		fscanf (random_series, "%hd\n%c\n", &(series[i]->anoLancamento), &(series[i]->temporada));
+		fscanf (random_series, "%hd\t%c\t", &(series[i]->anoLancamento), &(series[i]->temporada));
 
 		// Lendo o nome da série;
-		series[i]->tituloSerie = str_read (random_series, '\0', '\n', -1, -1);
+		series[i]->tituloSerie = str_read (random_series, '\0', '\t', -1, -1);
 		series[i]->titulo_size = strlen (series[i]->tituloSerie) + 1;
 
 		// lendo a descrição da série;
-		series[i]->descSerie = str_read (random_series, '\0', '\n', -1, -1);
+		series[i]->descSerie = str_read (random_series, '\0', '\t', -1, -1);
 		series[i]->desc_size = strlen (series[i]->descSerie) + 1;
 
 		// Lendo o gênero da série;
-		series[i]->generoSerie = str_read (random_series, '\0', '\n', -1, -1);
+		series[i]->generoSerie = str_read (random_series, '\0', '\t', '\n', -1);
 		series[i]->genero_size = strlen (series[i]->generoSerie) + 1;
 
 		// Pegando um valor aleatório para op ID da série lida;
