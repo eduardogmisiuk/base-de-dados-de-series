@@ -8,6 +8,8 @@
 *.in
 *.log
 
+vgcore.*
+
 # Precompiled Headers
 *.gch
 *.pch
