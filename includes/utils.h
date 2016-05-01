@@ -5,9 +5,9 @@
 #define _UTILS_H_
 
 #define FIELD_SEPARATOR '|'
-#define REGISTER_SEPARATOR 186
+#define REGISTER_SEPARATOR (signed char) 186
 
-#define ID_SIZE sizeof (unsigned int)
+#define ID_SIZE sizeof (int)
 #define PRODUCAO_SIZE 60*sizeof (char)
 #define ANO_SIZE sizeof (short int)
 #define TEMPORADA_SIZE 1*sizeof (char)

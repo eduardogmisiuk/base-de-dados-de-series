@@ -14,9 +14,12 @@ compile:
 	@gcc -o $(PROGRAM_EXEC) src/*.c -I./includes $(CFLAGS)
 	@find -name "vgcore.*" -exec rm -rf {} \;
 
-run:
+runtest:
 	@echo "Press any key to clear the terminal and run the program..."
 	@read
 	@clear
 	@valgrind $(VALGRINDFLAGS) ./$(PROGRAM_EXEC) $(CASE) $(ERROR)
 	@cat err.log
+
+run:
+	@valgrind $(VALGRINDFLAGS) ./$(PROGRAM_EXEC)

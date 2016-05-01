@@ -108,14 +108,7 @@ void destroy_file (SERIES_DATABASE **db) {
 		// Liberando memória que tenha sido alocada;
 		if ((*db)->name != NULL) free ((*db)->name);
 		// Caso tenha algum dado na struct SERIE, será desalocada aqui;
-		if ((*db)->s != NULL) {
-
-			if ((*db)->s->tituloSerie != NULL) free ((*db)->s->tituloSerie);
-			if ((*db)->s->descSerie != NULL) free ((*db)->s->descSerie);
-			if ((*db)->s->producao != NULL) free ((*db)->s->producao);
-			if ((*db)->s->generoSerie != NULL) free ((*db)->s->generoSerie);
-
-		}
+		remove_serie (&(*db)->s);
 
 		// Caso o arquivo esteja aberto, vamos fechá-lo;
 		if ((*db)->file != NULL) fclose ((*db)->file);
@@ -135,50 +128,176 @@ void destroy_file (SERIES_DATABASE **db) {
  * Autor: Raul Wagner Martins Costa.
  *
  * Retorno:
- *  0 - Sucesso na busca
- *  1 - Erro na abertura de arquivo
- *  4 - O Id fornecido é invalido
+ * 0 - Sucesso na busca.
+ * 1 - Erro na abertura de arquivo.
+ * 2 - Erro na alocação de memória.
+ * 4 - O ID fornecido é inválido.
  */
-int searchSeries(SERIES_DATABASE* db)
-{
+int search_series(SERIES_DATABASE* db) {
+	// ID que a pessoa deseja buscar;
 	int id;
 	char c;
-	scanf("%d", &id);
-    fgetc(stdin);
-    if(db->file == NULL)
-		db->file = fopen(db->name, "r");
-	if(db->file == NULL)
-	{
-        fprintf(stderr, ERROR_OPENING_FILE);
+	int error;
+
+	scanf ("%d", &id);
+    getc (stdin);
+
+	db->file = fopen (db->name, "r");
+	if (db->file == NULL) {
+
+        fprintf (stderr, ERROR_OPENING_FILE);
         return OPENING_FILE;
+
 	}
-	while(!feof(db->file))
-	{
-		while((c = fgetc(db->file) != 186) && (!feof(db->file)))
-		{
-			fread(&(db->s->idSerie) , ID_SIZE, 1, db->file);
-			if(db->s->idSerie == id)
-			{
-				fread(&(db->s->producao), PRODUCAO_SIZE,1, db->file);
-				fread(&(db->s->anoLancamento), ANO_SIZE,1, db->file);
-				fread(&(db->s->temporada), TEMPORADA_SIZE, 1, db->file);
-				
-				db->s->tituloSerie = str_read(db->file, FIELD_SEPARATOR, -1, -1, -1);
-				db->s->descSerie = str_read(db->file, FIELD_SEPARATOR, -1, -1, -1);
-				db->s->generoSerie = str_read(db->file, FIELD_SEPARATOR, -1, -1, -1);
-				
-				db->s->titulo_size = strlen(db->s->tituloSerie) +1;
-				db->s->desc_size = strlen(db->s->descSerie) +1;
-				db->s->genero_size = strlen(db->s->generoSerie) +1;
-				print_serie(db->s);
-				fclose(db->file);
-				return 0;//operacao funcionou!
-			}
+	else
+		rewind (db->file);
+
+	if (db->s != NULL) remove_serie (&db->s);
+	error = create_serie (&db->s);
+	if (error != 0) {
+
+		fclose (db->file);
+		db->file = NULL;
+		return error;
+
+	}
+
+	while (!feof (db->file) && fread (&(db->s->idSerie) , ID_SIZE, 1, db->file)) {
+
+		if (db->s->idSerie == id) {
+
+			fread (db->s->producao, PRODUCAO_SIZE, 1, db->file);
+			fread (&(db->s->anoLancamento), ANO_SIZE, 1, db->file);
+			fread (&(db->s->temporada), TEMPORADA_SIZE, 1, db->file);
+
+			db->s->tituloSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
+			db->s->descSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
+			db->s->generoSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
+
+			db->s->titulo_size = strlen (db->s->tituloSerie) + 1;
+			db->s->desc_size = strlen (db->s->descSerie) + 1;
+			db->s->genero_size = strlen (db->s->generoSerie) + 1;
+
+			// Imprimindo a série encontrada;
+			printf ("________________________________________________\n");
+			print_serie (db->s);
+			printf ("\n");
+			remove_serie (&db->s);
+
+			// Fechando o arquivo;
+			fclose (db->file);
+			db->file = NULL;
+
+			// Operação funcionou!
+			return 0;
+
 		}
+
+		// O while aqui só irá até o final do registro;
+		else while (!feof (db->file) && (c = fgetc (db->file)) != REGISTER_SEPARATOR) {
+			continue;
+		}
+
 	}
+
 	fclose(db->file);
-	/*fprintf(stderr, ERROR_ID_NOT_FOUND);
-	return INVALID_ID;*/
+	db->file = NULL;
+	remove_serie (&db->s);
+
+	fprintf(stderr, ERROR_ID_NOT_FOUND);
+	return ID_NOT_FOUND;
+}
+
+/**
+ * Função para imprimir todas as séries do banco de dados.
+ *
+ * db - banco de dados de séries
+ *
+ * Retorno:
+ * 0 - Buscou todas as séries com sucesso;
+ * 1 - Erro na abertura do arquivo;
+ * 2 - Memória insuficiente para alocação.
+ */
+int all_series (SERIES_DATABASE *db) {
+	//	Caractere temporário para percorrer arquivo.1
+	char last;
+	int error;
+
+	// O ideal é que o arquivo já esteja nulo.
+	if (db->file == NULL)
+
+		// Se assim for ele é aberto.
+		db->file = fopen (db->name, "r");
+
+		// Se não foi alocado, houve um erro.
+		if (db->file == NULL) {
+
+			fprintf (stderr, ERROR_OPENING_FILE);
+			return OPENING_FILE;
+
+		}
+	else
+		// Caso contrário, voltamos ao início do arquivo.
+		rewind (db->file);
+
+	// A estrutura que guarda séries deve ter sido esvaziada previamente.
+	if (db->s != NULL) remove_serie (&(db->s));
+
+	// Então, uma estrutura vazia é criada com os campos de tamanho fixo já alocados.
+	error = create_serie (&(db->s));
+	// Nessa etapa, também pode haver um erro ao alocar.
+	if (error != 0) {
+	
+		fclose (db->file);
+		db->file = NULL;
+		return error;
+	
+	}
+
+	// Enquanto todos os registros não tiverem sido lidos.	
+	while (!feof (db->file) && fread (&(db->s->idSerie), ID_SIZE, 1, db->file)) {
+
+		// Lê-se cada campo fixo deles.
+		fread (db->s->producao, PRODUCAO_SIZE, 1, db->file);
+		fread (&(db->s->anoLancamento), ANO_SIZE, 1, db->file);
+		fread (&(db->s->temporada), TEMPORADA_SIZE, 1, db->file);
+
+		// Lê-se os campos de tamanho variável (strings).
+		db->s->tituloSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
+		db->s->descSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
+		db->s->generoSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
+
+		// Os tamanhos dos campos são então salvos.
+		db->s->titulo_size = strlen (db->s->tituloSerie) + 1;
+		db->s->desc_size = strlen (db->s->descSerie) + 1;
+		db->s->genero_size = strlen (db->s->generoSerie) + 1;
+
+		// Retira-se o terminador do registro do buffer.
+		fread (&last, sizeof (char), 1, db->file);
+
+		// Imprime-se um separador de registros.
+		printf ("________________________________________________\n");
+		print_serie (db->s);
+		printf ("\n");
+
+		// Liberam-se as strings.
+		free (db->s->tituloSerie);
+		free (db->s->descSerie);
+		free (db->s->generoSerie);
+
+		// Marcando com NULL para garantir que seja liberado corretamente se
+		// o loop for interrompido.
+		db->s->tituloSerie = db->s->descSerie = db->s->generoSerie = NULL;
+
+	}
+
+	// Remove-se a estrutura de série auxiliar.
+	remove_serie (&(db->s));
+
+	fclose (db->file);
+	db->file = NULL;
+
+	return 0;
 }
 
 /**
@@ -368,4 +487,61 @@ void print_serie (SERIE *s) {
 	printf ("Ano de lançamento: %d\n", s->anoLancamento);
 	printf ("Número de temporadas: %d\n", s->temporada);
 	printf ("Gênero: %s\n", s->generoSerie);
+}
+
+/**
+ *
+ *
+ * Retorno:
+ */
+int create_serie (SERIE **s) {
+	*s = (SERIE *) malloc (sizeof (SERIE));
+	if (*s == NULL) {
+		fprintf (stderr, ERROR_ALLOCATION);
+		return ALLOCATION;
+	}
+
+	(*s)->tituloSerie = NULL;
+	(*s)->producao = (char *) calloc (60, sizeof (char));
+	if ((*s)->producao == NULL) {
+		free (*s);
+		*s = NULL;
+		fprintf (stderr, ERROR_ALLOCATION);
+		return ALLOCATION;
+	}
+	(*s)->descSerie = NULL;
+	(*s)->generoSerie = NULL;
+
+	return 0;
+}
+
+/**
+ *
+ *
+ * Retorno:
+ */
+void remove_serie (SERIE **s) {
+	if (s != NULL && *s != NULL) {
+
+		if ((*s)->tituloSerie != NULL) {
+			free ((*s)->tituloSerie);
+			(*s)->tituloSerie = NULL;
+		}
+		if ((*s)->descSerie != NULL) {
+			free ((*s)->descSerie);
+			(*s)->descSerie = NULL;
+		}
+		if ((*s)->generoSerie != NULL) {
+			free ((*s)->generoSerie);
+			(*s)->generoSerie = NULL;
+		}
+		if ((*s)->producao != NULL) {
+			free ((*s)->producao);
+			(*s)->producao = NULL;
+		}
+
+		free (*s);
+		*s = NULL;
+
+	}
 }

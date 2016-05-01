@@ -11,10 +11,17 @@ int main (int argc, char *argv[]) {
 	// Inicializando o arquivo;
 	create_file (DB_FILE_NAME, &db);
 
+	printf ("==================== SERIES ====================\n");
+	printf ("Bem-vindo! Selecione uma das opções abaixo:\n");
+	printf ("0 - Sair\n");
+	printf ("1 - Gerar arquivo da base de dados aleatório\n");
+	printf ("2 - Buscar por uma série\n");
+	printf ("3 - Mostrar todas as séries\n");
+	printf ("Opção escolhida: ");
+
 	while (opt != 0) {
 
 		printf ("==================== SERIES ====================\n");
-		printf ("Bem-vindo! Selecione uma das opções abaixo:\n");
 		printf ("0 - Sair\n");
 		printf ("1 - Gerar arquivo da base de dados aleatório\n");
 		printf ("2 - Buscar por uma série\n");
@@ -37,12 +44,12 @@ int main (int argc, char *argv[]) {
 
 			case 2:
 				printf ("Digite o ID da série: ");
-				searchSeries(db);
+				search_series(db);
 				break;
 
 			case 3:
 				printf ("Séries contidas no sistema:\n");
-				// TODO: criar a função de buscar todas as séries. Programmer: Allan.
+				all_series (db);
 				break;
 
 		}
