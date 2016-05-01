@@ -143,7 +143,6 @@ int searchSeries(SERIES_DATABASE* db)
 {
 	int id;
 	char c;
-	int aux;//auxiliar na leitura do id
 	scanf("%d", &id);
     fgetc(stdin);
     if(db->file == NULL)
@@ -158,7 +157,7 @@ int searchSeries(SERIES_DATABASE* db)
 		while((c = fgetc(db->file) != 186) && (!feof(db->file)))
 		{
 			fread(&(db->s->idSerie) , ID_SIZE, 1, db->file);
-			if(db->s->idSerie == aux)
+			if(db->s->idSerie == id)
 			{
 				fread(&(db->s->producao), PRODUCAO_SIZE,1, db->file);
 				fread(&(db->s->anoLancamento), ANO_SIZE,1, db->file);
