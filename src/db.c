@@ -142,11 +142,12 @@ void destroy_file (SERIES_DATABASE **db) {
 int searchSeries(SERIES_DATABASE* db)
 {
 	int id;
+	char c;
 	int aux;//auxiliar na leitura do id
 	scanf("%d", &id);
     fgetc(stdin);
     if(db->file == NULL)
-		db->file = fopen(db->name, r);
+		db->file = fopen(db->name, "r");
 	if(db->file == NULL)
 	{
         fprintf(stderr, ERROR_OPENING_FILE);
@@ -159,7 +160,7 @@ int searchSeries(SERIES_DATABASE* db)
 			fread(&(db->s->idSerie) , ID_SIZE, 1, db->file);
 			if(db->s->idSerie == aux)
 			{
-				fread(&(db->s->producao), PROD_SIZE,1, db->file);
+				fread(&(db->s->producao), PRODUCAO_SIZE,1, db->file);
 				fread(&(db->s->anoLancamento), ANO_SIZE,1, db->file);
 				fread(&(db->s->temporada), TEMPORADA_SIZE, 1, db->file);
 				
