@@ -1,3 +1,12 @@
+/*
+ * Cabeçalho do código fonte da implementação da base de dados.
+ *
+ * Autores:
+ * Allan Silva Domingues 	 9293290
+ * Eduardo Garcia Misiuk 	 9293230
+ * Raul Wagner Martins Costa 9293032
+ */
+
 #ifndef _DB_H_
 #define _DB_H_
 

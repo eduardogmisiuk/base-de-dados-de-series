@@ -1,3 +1,6 @@
+# Script to write an archive with series gotten from IMDb site.
+# Author: Allan Silva Domingues
+
 # For regular expressions
 import re
 # Used to open and request pages

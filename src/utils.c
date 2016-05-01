@@ -1,6 +1,12 @@
-/*------------------------------------------------------------------------/
-\       Eduardo Garcia Misiuk | 9293230 | USP - ICMC | 22.11.2015         \
-/------------------------------------------------------------------------*/
+/*
+ * Biblioteca com funções úteis para a implementação do trabalho.
+ *
+ * Autores:
+ * Allan Silva Domingues 	 9293290
+ * Eduardo Garcia Misiuk 	 9293230
+ * Raul Wagner Martins Costa 9293032
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

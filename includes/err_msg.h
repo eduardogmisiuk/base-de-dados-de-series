@@ -1,3 +1,12 @@
+/*
+ * Mensagens e números de erros.
+ *
+ * Autores:
+ * Allan Silva Domingues 	 9293290
+ * Eduardo Garcia Misiuk 	 9293230
+ * Raul Wagner Martins Costa 9293032
+ */
+
 #ifndef _ERR_MSG_H_
 #define _ERR_MSG_H_
 

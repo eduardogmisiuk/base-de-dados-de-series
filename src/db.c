@@ -1,3 +1,13 @@
+/*
+ * Implementação da base de dados de séries. Todas as funções que mexem
+ * com os arquivos de base de dados estão nesta biblioteca.
+ *
+ * Autores:
+ * Allan Silva Domingues 	 9293290
+ * Eduardo Garcia Misiuk 	 9293230
+ * Raul Wagner Martins Costa 9293032
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -57,10 +67,10 @@ struct SERIE {
  * name - nome do arquivo da base de dados;
  * db - endereço da base de dados.
  *
- * Retorno:
- * 0 - Sucesso ao criar a base de dados;
- * 2 - Falha de alocação.
- * 3 - Parâmetro inválido;
+ * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
+ * se encontram descritos no arquivo err_msg.h na pasta includes.
+ *
+ * Autores: Allan Silva Domingues e Eduardo Garcia Misiuk.
  */
 int create_file (const char *name, SERIES_DATABASE **db) {
 	if (name == NULL){
@@ -69,7 +79,6 @@ int create_file (const char *name, SERIES_DATABASE **db) {
 	}
 
 	*db = (SERIES_DATABASE *) malloc (sizeof (SERIES_DATABASE));
-
 	// Caso falhe a alocação de memória para a variável db;
 	if (*db == NULL){
 		fprintf (stderr, ERROR_ALLOCATION);
@@ -127,11 +136,8 @@ void destroy_file (SERIES_DATABASE **db) {
  *
  * Autor: Raul Wagner Martins Costa.
  *
- * Retorno:
- * 0 - Sucesso na busca.
- * 1 - Erro na abertura de arquivo.
- * 2 - Erro na alocação de memória.
- * 4 - O ID fornecido é inválido.
+ * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
+ * se encontram descritos no arquivo err_msg.h na pasta includes.
  */
 int search_series(SERIES_DATABASE* db) {
 	// ID que a pessoa deseja buscar;
@@ -164,8 +170,10 @@ int search_series(SERIES_DATABASE* db) {
 
 	while (!feof (db->file) && fread (&(db->s->idSerie) , ID_SIZE, 1, db->file)) {
 
+		// Caso o ID que foi pega seja o que estamos procurando;
 		if (db->s->idSerie == id) {
 
+			// Lendo as informações da série;
 			fread (db->s->producao, PRODUCAO_SIZE, 1, db->file);
 			fread (&(db->s->anoLancamento), ANO_SIZE, 1, db->file);
 			fread (&(db->s->temporada), TEMPORADA_SIZE, 1, db->file);
@@ -213,13 +221,11 @@ int search_series(SERIES_DATABASE* db) {
  *
  * db - banco de dados de séries
  *
- * Retorno:
- * 0 - Buscou todas as séries com sucesso;
- * 1 - Erro na abertura do arquivo;
- * 2 - Memória insuficiente para alocação.
+ * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
+ * se encontram descritos no arquivo err_msg.h na pasta includes.
  */
 int all_series (SERIES_DATABASE *db) {
-	//	Caractere temporário para percorrer arquivo.1
+	//	Caractere temporário para percorrer arquivo;
 	char last;
 	int error;
 
@@ -305,10 +311,8 @@ int all_series (SERIES_DATABASE *db) {
  *
  * db - arquivo da base de dados.
  *
- * Retorno:
- * 0 - Sucesso na geração;
- * 1 - Erro na abertura de arquivo;
- * 2 - Erro de alocação de memória;
+ * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
+ * se encontram descritos no arquivo err_msg.h na pasta includes.
  *
  * Autores: Allan Silva Domingues e Eduardo Garcia Misiuk.
  */
@@ -478,21 +482,28 @@ int generate_random_file (SERIES_DATABASE *db) {
  * Imprime uma dada série.
  *
  * s - série a ser impressa.
+ *
+ * Autor: Eduardo Garcia Misiuk
  */
 void print_serie (SERIE *s) {
-	printf ("ID: %d\n", s->idSerie);
-	printf ("Título: %s\n", s->tituloSerie);
-	printf ("Descrição: %s\n", s->descSerie);
-	printf ("País de produção: %s\n", s->producao);
-	printf ("Ano de lançamento: %d\n", s->anoLancamento);
-	printf ("Número de temporadas: %d\n", s->temporada);
-	printf ("Gênero: %s\n", s->generoSerie);
+	if (s != NULL){
+		printf ("ID: %d\n", s->idSerie);
+		printf ("Título: %s\n", s->tituloSerie);
+		printf ("Descrição: %s\n", s->descSerie);
+		printf ("País de produção: %s\n", s->producao);
+		printf ("Ano de lançamento: %d\n", s->anoLancamento);
+		printf ("Número de temporadas: %d\n", s->temporada);
+		printf ("Gênero: %s\n", s->generoSerie);
+	}
 }
 
 /**
+ * Cria uma série.
  *
+ * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
+ * se encontram descritos no arquivo err_msg.h na pasta includes.
  *
- * Retorno:
+ * Autores: Allan Silva Domingues e Eduardo Garcia Misiuk.
  */
 int create_serie (SERIE **s) {
 	*s = (SERIE *) malloc (sizeof (SERIE));
@@ -516,9 +527,11 @@ int create_serie (SERIE **s) {
 }
 
 /**
+ * Desaloca toda a memória da struct SERIE.
  *
+ * s - endereço da struct a ser desalocada.
  *
- * Retorno:
+ * Autor: Eduardo Garcia Misiuk.
  */
 void remove_serie (SERIE **s) {
 	if (s != NULL && *s != NULL) {

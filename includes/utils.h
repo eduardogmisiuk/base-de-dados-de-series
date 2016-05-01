@@ -1,6 +1,13 @@
-/*------------------------------------------------------------------------/
-\       Eduardo Garcia Misiuk | 9293230 | USP - ICMC | 08.11.2015         \
-/------------------------------------------------------------------------*/
+/*
+ * Cabeçalho do código fonte de funções úteis. contém, ainda, define's 
+ * muito utilizados no código.
+ *
+ * Autores:
+ * Allan Silva Domingues 	 9293290
+ * Eduardo Garcia Misiuk 	 9293230
+ * Raul Wagner Martins Costa 9293032
+ */
+
 #ifndef _UTILS_H_
 #define _UTILS_H_
 

@@ -1,3 +1,12 @@
+/*
+ * Interface para o programa de séries.
+ *
+ * Autores:
+ * Allan Silva Domingues 	 9293290
+ * Eduardo Garcia Misiuk 	 9293230
+ * Raul Wagner Martins Costa 9293032
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -7,6 +16,7 @@
 int main (int argc, char *argv[]) {
 	SERIES_DATABASE *db = NULL;
 	int opt = 1;
+	int error;
 	
 	// Inicializando o arquivo;
 	create_file (DB_FILE_NAME, &db);
@@ -37,9 +47,9 @@ int main (int argc, char *argv[]) {
 
 			case 1:
 				printf ("Gerando arquivos...\n");
-				generate_random_file (db);
+				error = generate_random_file (db);
 				// TODO: verificação de erros da função generate_random_file ();
-				printf ("Arquivos gerados com sucesso!\n");
+				if (error == 0) printf ("Arquivos gerados com sucesso!\n");
 				break;
 
 			case 2:
@@ -50,6 +60,10 @@ int main (int argc, char *argv[]) {
 			case 3:
 				printf ("Séries contidas no sistema:\n");
 				all_series (db);
+				break;
+
+			default:
+				printf ("Opção %d não é válida!\n", opt);
 				break;
 
 		}
