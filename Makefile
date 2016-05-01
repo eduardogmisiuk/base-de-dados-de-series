@@ -12,6 +12,7 @@ clean:
 compile:
 	@clear
 	@gcc -o $(PROGRAM_EXEC) src/*.c -I./includes $(CFLAGS)
+	@find -name "vgcore.*" -exec rm -rf {} \;
 
 run:
 	@echo "Press any key to clear the terminal and run the program..."
