@@ -8,5 +8,6 @@ int create_file (const char *name, SERIES_DATABASE **db);
 void destroy_file (SERIES_DATABASE **db);
 int generate_random_file (SERIES_DATABASE *db);
 int searchSeries(SERIES_DATABASE* db);
+void print_serie (SERIE *s);
 
 #endif

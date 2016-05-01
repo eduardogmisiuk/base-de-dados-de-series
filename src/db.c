@@ -329,3 +329,18 @@ int generate_random_file (SERIES_DATABASE *db) {
 
 	return 0;
 }
+
+/**
+ * Imprime uma dada série.
+ *
+ * s - série a ser impressa.
+ */
+void print_serie (SERIE *s) {
+	printf ("ID: %d\n", s->idSerie);
+	printf ("Título: %s\n", s->tituloSerie);
+	printf ("Descrição: %s\n", s->descSerie);
+	printf ("País de produção: %s\n", s->producao);
+	printf ("Ano de lançamento: %d\n", s->anoLancamento);
+	printf ("Número de temporadas: %d\n", s->temporada);
+	printf ("Gênero: %s\n", s->generoSerie);
+}
