@@ -13,7 +13,7 @@
 #define TEMPORADA_SIZE 1*sizeof (char)
 
 #define RANDOM_SERIES "series/series.txt"
-#define SIZE_RANDOM_SERIES 3
+#define SIZE_RANDOM_SERIES 100
 #define RANDOM_LIMIT 1000
 
 #define DB_FILE_NAME "series/series.db"

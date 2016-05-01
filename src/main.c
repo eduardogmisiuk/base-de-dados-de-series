@@ -6,7 +6,7 @@
 
 int main (int argc, char *argv[]) {
 	SERIES_DATABASE *db = NULL;
-	char opt = 1;
+	int opt = 1;
 	int i, aux; //contador , auxiliar na leitura do retorno da busca de uma serie
 	
 	// Inicializando o arquivo;
@@ -20,7 +20,9 @@ int main (int argc, char *argv[]) {
 		printf ("1 - Gerar arquivo da base de dados aleatório\n");
 		printf ("2 - Buscar por uma série\n");
 		printf ("3 - Mostrar todas as séries\n");
-		printf ("Opção escolhida: %c\n", &opt);
+		printf ("Opção escolhida: ");
+		scanf ("%d", &opt);
+		getc (stdin);
 
 		switch (opt) {
 
@@ -52,7 +54,7 @@ int main (int argc, char *argv[]) {
 				}
 				else
 				{
-					printf("Nome: ");
+					/*printf("Nome: ");
 					for(i = 0; i < db->s[aux].titulo_size; i++)
 						printf("%c",db->s[aux].tituloSerie);
 					printf("\n");
@@ -72,7 +74,7 @@ int main (int argc, char *argv[]) {
 						
 					printf("Ano de Lancamento: %d", db->s[aux].anoLancamento);
 					
-					printf("Numero de Temporadas: %c", db->s[aux].temporada);
+					printf("Numero de Temporadas: %c", db->s[aux].temporada);*/
 							
 				}
 				break;
