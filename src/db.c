@@ -132,29 +132,53 @@ void destroy_file (SERIES_DATABASE **db) {
  *
  * db - arquivo da base de dados.
  *
- * Autor: Raul (TODO: complete o seu nome aqui).
+ * Autor: Raul Wagner Martins Costa.
  *
- * Retorno: 
+ * Retorno:
+ *  0 - Sucesso na busca
+ *  1 - Erro na abertura de arquivo
+ *  4 - O Id fornecido é invalido
  */
 int searchSeries(SERIES_DATABASE* db)
 {
-	if(db->s != NULL)
+	int id;
+	char c;
+	scanf("%d", &id);
+    fgetc(stdin);
+    if(db->file == NULL)
+		db->file = fopen(db->name, "r");
+	if(db->file == NULL)
 	{
-		int id;
-		int i;
-		int nSeries = db->n_series;
-		scanf("%d", &id);
-		fgetc(stdin);
-		for(i = 0; i < nSeries; i++)
+        fprintf(stderr, ERROR_OPENING_FILE);
+        return OPENING_FILE;
+	}
+	while(!feof(db->file))
+	{
+		while((c = fgetc(db->file) != 186) && (!feof(db->file)))
 		{
+			fread(&(db->s->idSerie) , ID_SIZE, 1, db->file);
 			if(db->s->idSerie == id)
 			{
-				return i;
+				fread(&(db->s->producao), PRODUCAO_SIZE,1, db->file);
+				fread(&(db->s->anoLancamento), ANO_SIZE,1, db->file);
+				fread(&(db->s->temporada), TEMPORADA_SIZE, 1, db->file);
+				
+				db->s->tituloSerie = str_read(db->file, FIELD_SEPARATOR, -1, -1, -1);
+				db->s->descSerie = str_read(db->file, FIELD_SEPARATOR, -1, -1, -1);
+				db->s->generoSerie = str_read(db->file, FIELD_SEPARATOR, -1, -1, -1);
+				
+				db->s->titulo_size = strlen(db->s->tituloSerie) +1;
+				db->s->desc_size = strlen(db->s->descSerie) +1;
+				db->s->genero_size = strlen(db->s->generoSerie) +1;
+				print_serie(db->s);
+				fclose(db->file);
+				return 0;//operacao funcionou!
 			}
 		}
-		return -1;
 	}
-	return -2;
+	fclose(db->file);
+	/*fprintf(stderr, ERROR_ID_NOT_FOUND);
+	return INVALID_ID;*/
 }
 
 /**
@@ -254,7 +278,7 @@ int generate_random_file (SERIES_DATABASE *db) {
 		series[i]->generoSerie = str_read (random_series, '\0', '\n', -1, -1);
 		series[i]->genero_size = strlen (series[i]->generoSerie) + 1;
 
-		// Pegando um valor aleatório para op ID da série lida;
+		// Pegando um valor aleatório para o ID da série lida;
 		do random = rand () % RANDOM_LIMIT;
 		while (used[random] == 1);
 		used[random] = 1;
@@ -331,7 +355,6 @@ int generate_random_file (SERIES_DATABASE *db) {
 
 	return 0;
 }
-
 /**
  * Imprime uma dada série.
  *
