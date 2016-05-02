@@ -8,18 +8,18 @@ all: clean compile run
 
 clean:
 	@find -name "*~" -exec rm -rf {} \;
+	@find -name "vgcore.*" -exec rm -rf {} \;
+	@find -name "err.log" - exec rm -rf {} \;
+	@clear
 
 compile:
-	@clear
 	@gcc -o $(PROGRAM_EXEC) src/*.c -I./includes $(CFLAGS)
-	@find -name "vgcore.*" -exec rm -rf {} \;
 
-runtest:
+runtest: clean compile
 	@echo "Press any key to clear the terminal and run the program..."
 	@read
 	@clear
 	@valgrind $(VALGRINDFLAGS) ./$(PROGRAM_EXEC) $(CASE) $(ERROR)
-	@cat err.log
 
 run:
-	@valgrind $(VALGRINDFLAGS) ./$(PROGRAM_EXEC)
+	@valgrind $(VALGRINDFLAGS) ./$(PROGRAM_EXEC) $(ERROR)

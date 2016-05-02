@@ -23,15 +23,9 @@ int main (int argc, char *argv[]) {
 
 	printf ("==================== SERIES ====================\n");
 	printf ("Bem-vindo! Selecione uma das opções abaixo:\n");
-	printf ("0 - Sair\n");
-	printf ("1 - Gerar arquivo da base de dados aleatório\n");
-	printf ("2 - Buscar por uma série\n");
-	printf ("3 - Mostrar todas as séries\n");
-	printf ("Opção escolhida: ");
 
 	while (opt != 0) {
 
-		printf ("==================== SERIES ====================\n");
 		printf ("0 - Sair\n");
 		printf ("1 - Gerar arquivo da base de dados aleatório\n");
 		printf ("2 - Buscar por uma série\n");
