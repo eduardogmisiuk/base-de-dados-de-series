@@ -9,7 +9,6 @@ all: clean compile run
 clean:
 	@find -name "*~" -exec rm -rf {} \;
 	@find -name "vgcore.*" -exec rm -rf {} \;
-	@find -name "err.log" - exec rm -rf {} \;
 	@clear
 
 compile:
@@ -22,4 +21,4 @@ runtest: clean compile
 	@valgrind $(VALGRINDFLAGS) ./$(PROGRAM_EXEC) $(CASE) $(ERROR)
 
 run:
-	@valgrind $(VALGRINDFLAGS) ./$(PROGRAM_EXEC) $(ERROR)
+	@valgrind $(VALGRINDFLAGS) ./$(PROGRAM_EXEC)

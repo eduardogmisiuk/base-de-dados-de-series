@@ -202,8 +202,10 @@ int search_series(SERIES_DATABASE* db) {
 		}
 
 		// O while aqui só irá até o final do registro;
-		else while (!feof (db->file) && (c = fgetc (db->file)) != REGISTER_SEPARATOR) {
-			continue;
+		else {
+			// Pulando os campos de tamanho fixo;
+			fseek (db->file, PRODUCAO_SIZE+ANO_SIZE+TEMPORADA_SIZE, SEEK_CUR);
+			while (!feof (db->file) && (c = fgetc (db->file)) != REGISTER_SEPARATOR) continue;
 		}
 
 	}
@@ -405,6 +407,7 @@ int generate_random_file (SERIES_DATABASE *db) {
 		do random = rand () % RANDOM_LIMIT;
 		while (used[random] == 1);
 		used[random] = 1;
+		printf ("%d\t", random);
 
 		// Armazenando o ID aleatório da série;
 		series[i]->idSerie = random;
