@@ -232,18 +232,16 @@ int all_series (SERIES_DATABASE *db) {
 	int error;
 
 	// O ideal é que o arquivo já esteja nulo.
-	if (db->file == NULL)
-
+	if (db->file == NULL) {
 		// Se assim for ele é aberto.
 		db->file = fopen (db->name, "r");
 
 		// Se não foi alocado, houve um erro.
 		if (db->file == NULL) {
-
 			fprintf (stderr, ERROR_OPENING_FILE);
 			return OPENING_FILE;
-
 		}
+	}
 	else
 		// Caso contrário, voltamos ao início do arquivo.
 		rewind (db->file);
