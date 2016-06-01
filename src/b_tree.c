@@ -123,6 +123,19 @@ void search_item (B_TREE *b, int key) {
 	// - Ir descendo na árvore conforme há necessidade
 }
 
+void print_index_recursive (int *n) {
+
+}
+
 int print_index (B_TREE *b) {
 	if (b == NULL) return INVALID_B_TREE;
 }
+
+/*int main (int argc, char *argv[]) {
+	printf ("int - %d\n", sizeof (int));
+	printf ("short int - %d\n", sizeof (short int));
+	printf ("NODE - %d\n", sizeof (NODE));
+	printf ("KEY - %d\n", sizeof (KEY));
+
+	return 0;
+}*/
