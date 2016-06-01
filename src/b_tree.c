@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "b_tree.h"
+#include "err_msg.h"
 
 inline int left_child (int a) { return a; }
 inline int right_child (int a) { return a+1; }
@@ -105,7 +106,7 @@ int catch_node (B_TREE *b, int rrn) {
 		fclose (b->index);
 	}
 
-	return 0;
+	return INVALID_B_TREE;
 }
 
 /**
@@ -120,4 +121,8 @@ void search_item (B_TREE *b, int key) {
 	// - Pegar o RRN da raiz
 	// - Fazer busca sequencial no vetor de chaves
 	// - Ir descendo na árvore conforme há necessidade
+}
+
+int print_index (B_TREE *b) {
+	if (b == NULL) return INVALID_B_TREE;
 }

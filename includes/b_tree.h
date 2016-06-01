@@ -13,4 +13,6 @@ int compare_key (KEY *a, KEY *b);
 
 int catch_node (B_TREE *b, int rrn);
 
+int print_index (B_TREE *b);
+
 #endif

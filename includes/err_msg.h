@@ -15,11 +15,13 @@
 #define ERROR_ALLOCATION "Erro: não há memória suficiente para realizar esta operação!\n"
 #define ERROR_INVALID_NAME "Erro: Nome inválido!\n"
 #define ERROR_ID_NOT_FOUND "Erro: ID não encontrado!\n"
+#define ERROR_INVALID_B_TREE "Erro: índice B* nulo!\n"
 
 // Números dos erros:
 #define OPENING_FILE 1
 #define ALLOCATION 2
 #define INVALID_NAME 3
 #define ID_NOT_FOUND 4
+#define INVALID_B_TREE 5
 
 #endif
