@@ -15,9 +15,9 @@ struct KEY {
 };
 
 // Cada nó ocupa uma página de disco de 64 bytes;
-//  1   2   3   4   5   6   7   8   9
-// |*| |*| |*| |*| |*| |*| |*| |*| |*|
-//    1   2   3   4   5   6   7   8
+//  1   2   3   4   5   6   7
+// |*| |*| |*| |*| |*| |*| |*|
+//    1   2   3   4   5   6
 struct NODE {
 	// RRN do nó no arquivo de índice;
 	short rrn;
