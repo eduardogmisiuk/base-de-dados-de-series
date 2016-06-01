@@ -32,6 +32,7 @@ struct NODE {
 struct B_TREE {
 	NODE *n;
 	char *filename;
+	FILE *header;
 	FILE *index;
 	// Número de nós que há no arquivo de índice;
 	int n_nodes;
@@ -48,6 +49,9 @@ struct B_TREE {
 B_TREE *create_tree (char *name) {
 	if (name != NULL) {
 		char *filename = (char *) malloc (strlen (name)*sizeof (char));
+		FILE* header_file;
+		header_file = fopen("header", "w+");
+		fwrite (0, sizeof(int), 1, header_file);
 
 		strcpy (filename, name);
 
@@ -56,8 +60,9 @@ B_TREE *create_tree (char *name) {
 		b->filename = filename;
 		b->n_nodes = 0;
 		b->index = NULL;
+		b->header = header_file;
 		b->n = NULL;
-
+		fclose(header_file);
 		return b;
 	}
 
@@ -121,6 +126,7 @@ void search_item (B_TREE *b, int key) {
 	// - Pegar o RRN da raiz
 	// - Fazer busca sequencial no vetor de chaves
 	// - Ir descendo na árvore conforme há necessidade
+	if (b->index == NULL) return; //a arvore nao possui registros
 }
 
 void print_index_recursive (int *n) {
@@ -129,6 +135,15 @@ void print_index_recursive (int *n) {
 
 int print_index (B_TREE *b) {
 	if (b == NULL) return INVALID_B_TREE;
+}
+
+int read_root (B_TREE *b) {
+	int rrn = 0;
+
+	rewind(b->header);
+	fread (&rrn, sizeof(int), 1, b->header);
+	
+	return rrn;
 }
 
 /*int main (int argc, char *argv[]) {
