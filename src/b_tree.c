@@ -146,7 +146,7 @@ void in_order_print (B_TREE *b, NODE *node, int n) {
 		int i, j;
 		for (i = 0; i < N_KEYS && node->keys[i].rrn != -1; i++) {
 			// Indo no filho à esquerda desta chave;
-			catch_node (b, left_child (node->keys[i].rrn));
+			catch_node (b, node->sons[left_child (node->keys[i].rrn)]);
 			in_order_print (b, b->n, n+1);
 			free (b->n);
 
@@ -157,10 +157,10 @@ void in_order_print (B_TREE *b, NODE *node, int n) {
 			printf ("%d\n", node->keys[i].key);
 		}
 
+		// Indo no filho à direita desta chave;
 		// Como provocaria uma repetição na impressão, somente a última
 		// chave irá entrar recursivamente no seu filho direito;
-		// Indo no filho à direita desta chave;
-		catch_node (b, right_child (node->keys[i-1].rrn));
+		catch_node (b, node->sons[right_child (node->keys[i-1].rrn)]);
 		in_order_print (b, b->n, n+1);
 
 		free (b->n);
