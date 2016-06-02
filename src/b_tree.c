@@ -134,11 +134,41 @@ void search_item (B_TREE *b, int key) {
 	if (b->index == NULL) return; //a arvore nao possui registros
 }
 
+/**
+ * 
+ *
+ * Parâmetros: 
+ */
 void in_order_print (B_TREE *b, NODE *node, int n) {
 	if (node != NULL) {
+		int i, j;
+		for (i = 0; i < N_KEYS && node->keys[i].rrn != -1; i++) {
+			// Indo no filho à esquerda desta chave;
+			catch_node (b, left_child (node->keys[i].rrn));
+			in_order_print (b, b->n, n+1);
+
+			// Processando a chave;
+			// Printando primeiro os espaços, para dar o visual de uma árvore;
+			for (j = 0; j < n; j++) printf ("\t");
+			// Imprimindo a chave;
+			printf ("%d\n", node->keys[i].key);
+		}
+
+		// Como provocaria uma repetição na impressão, somente a última
+		// chave irá entrar recursivamente no seu filho direito;
+		// Indo no filho à direita desta chave;
+		catch_node (b, right_child (node->keys[i-1].rrn));
+		in_order_print (b, b->n, n+1);
 	}
 }
 
+/**
+ * 
+ *
+ * Parâmetros: 
+ *
+ * Retorno:
+ */
 int print_index (B_TREE *b) {
 	if (b == NULL) return INVALID_B_TREE;
 
@@ -149,6 +179,13 @@ int print_index (B_TREE *b) {
 	in_order_print (b, b->n, 0);
 }
 
+/**
+ * 
+ *
+ * Parâmetros: 
+ *
+ * Retorno: 
+ */
 int read_root (B_TREE *b) {
 	int rrn = 0;
 
@@ -158,6 +195,7 @@ int read_root (B_TREE *b) {
 	return rrn;
 }
 
+// Resolvi deixar isso aqui para possíveis testes futuros;
 /*int main (int argc, char *argv[]) {
 	printf ("int - %d\n", sizeof (int));
 	printf ("short int - %d\n", sizeof (short int));
