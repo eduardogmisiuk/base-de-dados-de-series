@@ -104,13 +104,15 @@ int compare_key (KEY *a, KEY *b) {
  */
 int catch_node (B_TREE *b, int rrn) {
 	if (b != NULL && rrn >= 0) {
+		NODE *n = (NODE *) malloc (sizeof (NODE));
 		// Abrindo o arquivo de índice;
 		b->index = fopen (b->filename, "+w");
 
 		// Acha a posição;
 		fseek (b->index, SEEK_SET, rrn*sizeof (NODE));
 		// Lê o registro inteiro, guardando seu valor na variável n em b;
-		fread (b->n, sizeof (NODE), 1, b->index);
+		fread (n, sizeof (NODE), 1, b->index);
+		b->n = n;
 
 		// Fechando o arquivo;
 		fclose (b->index);
