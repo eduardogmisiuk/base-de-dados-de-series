@@ -44,29 +44,34 @@ struct B_TREE {
  *
  * Parâmetros: name - nome do arquivo de índice.
  *
- * Retorno: árvore B* alocada.
+ * Retorno: TODO.
  */
-B_TREE *create_tree (char *name) {
+int create_tree (char *name, B_TREE **b) {
 	if (name != NULL) {
+		*b = (B_TREE *) malloc (sizeof (B_TREE));
+		if (b == NULL) {
+			fprintf (stderr, ERROR_ALLOCATION);
+			return ALLOCATION;
+		}
+
 		char *filename = (char *) malloc (strlen (name)*sizeof (char));
 		FILE* header_file;
-		header_file = fopen("header", "w+");
-		fwrite (0, sizeof(int), 1, header_file);
 
+		// Para o usuário não modificar o nome do arquivo, copio este para
+		// outro
 		strcpy (filename, name);
 
-		B_TREE *b = (B_TREE *) malloc (sizeof (B_TREE));
+		(*b)->filename = filename;
+		(*b)->n_nodes = 0;
+		(*b)->index = NULL;
+		(*b)->n = NULL;
 
-		b->filename = filename;
-		b->n_nodes = 0;
-		b->index = NULL;
-		b->header = header_file;
-		b->n = NULL;
+		header_file = fopen("header", "w+");
+		fwrite (0, sizeof(int), 1, header_file);
+		(*b)->header = header_file;
+
 		fclose(header_file);
-		return b;
 	}
-
-	return NULL;
 }
 
 /**
@@ -129,12 +134,19 @@ void search_item (B_TREE *b, int key) {
 	if (b->index == NULL) return; //a arvore nao possui registros
 }
 
-void print_index_recursive (int *n) {
-
+void in_order_print (B_TREE *b, NODE *node, int n) {
+	if (node != NULL) {
+	}
 }
 
 int print_index (B_TREE *b) {
 	if (b == NULL) return INVALID_B_TREE;
+
+	int root = read_root (b);
+
+	catch_node (b, root);
+
+	in_order_print (b, b->n, 0);
 }
 
 int read_root (B_TREE *b) {
