@@ -146,6 +146,7 @@ void in_order_print (B_TREE *b, NODE *node, int n) {
 			// Indo no filho à esquerda desta chave;
 			catch_node (b, left_child (node->keys[i].rrn));
 			in_order_print (b, b->n, n+1);
+			free (b->n);
 
 			// Processando a chave;
 			// Printando primeiro os espaços, para dar o visual de uma árvore;
@@ -159,6 +160,8 @@ void in_order_print (B_TREE *b, NODE *node, int n) {
 		// Indo no filho à direita desta chave;
 		catch_node (b, right_child (node->keys[i-1].rrn));
 		in_order_print (b, b->n, n+1);
+
+		free (b->n);
 	}
 }
 
@@ -173,10 +176,14 @@ int print_index (B_TREE *b) {
 	if (b == NULL) return INVALID_B_TREE;
 
 	int root = read_root (b);
+	NODE *n = NULL;
 
 	catch_node (b, root);
+	n = b->n;
 
-	in_order_print (b, b->n, 0);
+	in_order_print (b, n, 0);
+
+	free (b->n);
 }
 
 /**
