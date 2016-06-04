@@ -133,7 +133,38 @@ void search_item (B_TREE *b, int key) {
 	// - Pegar o RRN da raiz
 	// - Fazer busca sequencial no vetor de chaves
 	// - Ir descendo na árvore conforme há necessidade
-	if (b->index == NULL) return; //a arvore nao possui registros
+	//if (b->index == NULL) return; //a arvore nao possui registros
+	int i;
+	NODE* busca = NULL;
+	int rrn_head;
+	b->index = fopen (b->filename, "r");
+	b->header = fopen ("header", "r");
+	fread (&rrn_head, sizeof(int), 1, b->header);
+	fseek (b->index, SEEK_SET, rrn_head*sizeof (NODE));
+	fread(busca, sizeof(NODE), 1, b->index);
+
+	while (busca != NULL) {
+		for (i = 0; i < N_KEYS; i++) {
+			if(busca->keys[i].key == key)
+			{
+				//achou
+			}
+			else if(busca->keys[i].key > key)
+			{
+				//vai p o filho
+				fseek (b->index, SEEK_SET, busca->sons[i]*sizeof (NODE));
+				fread (busca, sizeof (NODE), 1, b->index);
+				i = N_KEYS;
+			}
+			else if(busca->keys[i].key == -1)
+			{
+				fseek (b->index, SEEK_SET, busca->sons[i+1]*sizeof (NODE));
+				fread (busca, sizeof (NODE), 1, b->index);
+				i = N_KEYS;
+			}
+
+		}
+	}
 }
 
 /**
