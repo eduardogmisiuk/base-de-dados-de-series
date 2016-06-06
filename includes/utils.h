@@ -25,6 +25,13 @@
 
 #define DB_FILE_NAME "series/series.db"
 
+#define TRUE 1 == 1
+#define FALSE 1 != 1
+
+#define BUFFER_POOL_SIZE 3
+#define H_EXT ".header"
+#define I_EXT ".index"
+
 char *str_read (FILE *f, char d1, char d2, char d3, char d4);
 
 #endif
