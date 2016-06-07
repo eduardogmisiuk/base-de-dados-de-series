@@ -131,7 +131,8 @@ void print_error_by_code (int err_code) {
 /**
  * TODO
  *
- * Parâmetros: 
+ * Parâmetros: 	b - arvore b*
+ 				name - 
  *
  * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
  * se encontram descritos no arquivo err_msg.h na pasta includes.
@@ -481,10 +482,13 @@ void update_buffer (B_TREE *b, int rrn) {
 
 /**
  * TODO
+ *	Recupera o index no buffer a partir de um rrn passado como parametro
  *
- * Parâmetros: 
- *
- * Retorno: 
+ * Parâmetros: 	b - arvore B*
+ 				rrn - int com o valor do rrn do node armazenado no buffer
+ *		
+ * Retorno: o retorno indica o index do buffer correspondente ao rrn fornecido
+ 			o retorno de valor -1 indica que o rrn fornecido nao esta no buffer
  */
 int get_buffer_index (B_TREE *b, int rrn) {
 	int i;
