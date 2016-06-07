@@ -41,6 +41,8 @@ struct NODE {
 	int16_t sons[N_KEYS + 1];
 	/* Chaves; */
 	KEY keys[N_KEYS];
+	/* Número de chaves utilizadas; */
+	int32_t n_used;
 };
 
 /* Buffer no qual qualquer página é colocada ao ser lida do arquivo ou
@@ -230,7 +232,6 @@ int insert_page (B_TREE *b, NODE *n) {
 	if (b == NULL || n == NULL) return INVALID_ARGUMENT;
 
 	int i;
-	int32_t zero = 0;
 	FILE *f = fopen (b->filename, "r+");
 	if (f == NULL) return ALLOCATION;
 
@@ -238,13 +239,14 @@ int insert_page (B_TREE *b, NODE *n) {
 	fseek (f, (n->rrn) * CLUSTER, SEEK_SET);
 
 	/* A página será inserida no seguinte formato: */
-	/* - RRN da página  */
-	/* - Chave          */
-	/*   - ID da chave  */
-	/*   - RRN da chave */
-	/* - Filhos         */
-	/* - 4 zeros        */
-	/* Total de bytes a serem inseridos: CLUSTER + 4 */
+	/* - RRN da página  		 */
+	/* - Chave          		 */
+	/*   - ID da chave  		 */
+	/*   - RRN da chave			 */
+	/* - Filhos         		 */
+	/* - Número de chaves usadas */
+	/* Total de bytes a serem inseridos: CLUSTER */
+
 	/* Inserindo o RRN da página; */
 	fwrite (&(n->rrn), sizeof (int16_t), 1, f);
 
@@ -259,8 +261,8 @@ int insert_page (B_TREE *b, NODE *n) {
 		fwrite (&(n->sons[i]), sizeof (int16_t), 1, f);
 	}
 
-	/* Para completar a página de disco de 64 bytes, gravamos 0 nos 4 bytes restantes; */
-	fwrite (&zero, sizeof (int32_t), 1, f);
+	/* Inserindo o número de chaves utilizadas; */
+	fwrite (&(n->n_used), sizeof (int32_t), 1, f);
 
 	fclose (f);
 
@@ -532,18 +534,17 @@ int catch_node (B_TREE *b, int rrn) {
 int create_page (B_TREE *b, NODE **page) {
 	if (page == NULL) return INVALID_ARGUMENT;
 
-	else {
-		int i;
+	int i;
 
-		*page = (NODE *) malloc (sizeof (NODE));
-		if (*page== NULL) return ALLOCATION;
+	*page = (NODE *) malloc (sizeof (NODE));
+	if (*page== NULL) return ALLOCATION;
 
-		(*page)->rrn = ++(b->header->last_rrn);
-		memset ((*page)->sons, -1, sizeof (int16_t) * (N_KEYS + 1));
-		memset ((*page)->keys, -1, sizeof (KEY) * N_KEYS);
+	(*page)->rrn = ++(b->header->last_rrn);
+	memset ((*page)->sons, -1, sizeof (int16_t) * (N_KEYS + 1));
+	memset ((*page)->keys, -1, sizeof (KEY) * N_KEYS);
+	(*page)->n_used = 0;
 
-		return SUCCESS;
-	}
+	return SUCCESS;
 }
 
 int insert_in_header (B_TREE *b, KEY k) {

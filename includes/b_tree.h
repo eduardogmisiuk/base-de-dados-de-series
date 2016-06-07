@@ -3,7 +3,7 @@
 
 #define N_KEYS 7
 /* Tamanho de uma página de disco; */
-#define CLUSTER 60
+#define CLUSTER 64
 
 typedef struct NODE NODE;
 typedef struct B_TREE B_TREE;
