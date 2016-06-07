@@ -31,9 +31,9 @@ struct KEY {
 };
 
 /* Cada nó ocupa uma página de disco de 64 bytes; */
-/*  1   2   3   4   5   6   7 */
-/* |*| |*| |*| |*| |*| |*| |*|*/
-/*    1   2   3   4   5   6   */
+/*  1   2   3   4   5   6   7  */
+/* |*| |*| |*| |*| |*| |*| |*| */
+/*    1   2   3   4   5   6    */
 struct NODE {
 	/* RRN do nó no arquivo de índice; */
 	int16_t rrn;
@@ -86,30 +86,37 @@ void delete_header (B_TREE *b);
  */
 void print_error_by_code (int err_code) {
 	switch (err_code) {
+		/* Erro ao abrir um arquivo; */
 		case OPENING_FILE:
 			fprintf (stderr, ERROR_OPENING_FILE);
 			break;
 
+		/* Erro na alocação de memória; */
 		case ALLOCATION:
 			fprintf (stderr, ERROR_ALLOCATION);
 			break;
 
+		/* Nome de arquivo inválido; */
 		case INVALID_NAME:
 			fprintf (stderr, ERROR_INVALID_NAME);
 			break;
 
+		/* ID não encontrado;; */
 		case ID_NOT_FOUND:
 			fprintf (stderr, ERROR_ID_NOT_FOUND);
 			break;
 
+		/* Árvore B* passada está nula; */
 		case INVALID_B_TREE:
 			fprintf (stderr, ERROR_INVALID_B_TREE);
 			break;
 
+		/* Nó buscado não encontrado; */
 		case NODE_NOT_FOUND:
 			fprintf (stderr, ERROR_NODE_NOT_FOUND);
 			break;
 
+		/* Argumento passado a uma função é inválido; */
 		case INVALID_ARGUMENT:
 			fprintf (stderr, ERROR_INVALID_ARGUMENT);
 			break;
@@ -150,9 +157,9 @@ int create_header (B_TREE *b, char *name) {
 }
 
 /**
- * TODO
+ * Cria o buffer pool para a árvore B* dada.
  *
- * Parâmetros: 
+ * Parâmetros: b - árvore em que se deseja criar o buffer pool.
  *
  * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
  * se encontram descritos no arquivo err_msg.h na pasta includes.
@@ -197,6 +204,7 @@ int isset_header (B_TREE *b) {
  */
 int load_header (B_TREE *b) {
 	FILE *header = fopen (b->header->filename, "r");
+	/* Esta verificação é necessária, pois, caso retorne NULL, o arquivo não existe; */
 	if (header == NULL) {
 		return OPENING_FILE;
 	}
@@ -210,6 +218,51 @@ int load_header (B_TREE *b) {
 }
 
 /**
+ * Insere uma página no arquivo da árvore.
+ *
+ * Parâmetros: b - árvore onde será feita a inserção;
+ * 			   n - nó que será inserido.
+ *
+ * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
+ * se encontram descritos no arquivo err_msg.h na pasta includes.
+ */
+int insert_page (B_TREE *b, NODE *n) {
+	if (b == NULL || n == NULL) return INVALID_ARGUMENT;
+
+	int i;
+	FILE *f = fopen (b->filename, "r+");
+	if (f == NULL) return ALLOCATION;
+
+	/* Indo ao RRN desejado; */
+	fseek (f, (n->rrn) * CLUSTER, SEEK_SET);
+
+	/* A página será inserida no seguinte formato: */
+	/* - RRN da página  */
+	/* - Chave          */
+	/*   - ID da chave  */
+	/*   - RRN da chave */
+	/* - Filhos         */
+	/* Total de bytes a serem inseridos: CLUSTER */
+	/* Inserindo o RRN da página; */
+	fwrite (&(n->rrn), sizeof (int16_t), 1, f);
+
+	/* Inserindo as chaves; */
+	for (i = 0; i < N_KEYS; i++) {
+		fwrite (&(n->keys[i].id), sizeof (int32_t), 1, f);
+		fwrite (&(n->keys[i].rrn), sizeof (int16_t), 1, f);
+	}
+
+	/* Inserindo os filhos; */
+	for (i = 0; i < N_KEYS + 1; i++) {
+		fwrite (&(n->sons[i]), sizeof (int16_t), 1, f);
+	}
+
+	fclose (f);
+
+	return SUCCESS;
+}
+
+/**
  * TODO
  *
  * Parâmetros: 
@@ -218,9 +271,7 @@ int load_header (B_TREE *b) {
  * se encontram descritos no arquivo err_msg.h na pasta includes.
  */
 int update_header (B_TREE *b) {
-	FILE* header;
-
-	header = fopen (b->header->filename, "w+");
+	FILE* header = fopen (b->header->filename, "w+");
 	if (header == NULL) {
 		return OPENING_FILE;
 	}
@@ -236,9 +287,9 @@ int update_header (B_TREE *b) {
 }
 
 /**
- * TODO
+ * Inicialização das variáveis da árvore.
  *
- * Parâmetros: 
+ * Parâmetros: b - árvore que terá seus membros inicializados.
  *
  * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
  * se encontram descritos no arquivo err_msg.h na pasta includes.
@@ -340,24 +391,7 @@ int compare_key (KEY *a, KEY *b) {
 			return 1;
 	}
 
-	return 0;
-}
-
-/**
- * TODO
- *
- * Parâmetros: 
- *
- * Retorno: 
- */
-int at_buffer (B_TREE *b, int rrn) {
-	int i;
-
-	for (i = 0; i < b->buffer->used; i++)
-		if (b->buffer->page[i].rrn == rrn)
-			return TRUE;
-
-	return FALSE;
+	return -2;
 }
 
 /**

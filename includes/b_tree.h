@@ -1,7 +1,9 @@
 #ifndef _B_TREE_H_
 #define _B_TREE_H_
 
-#define N_KEYS 6
+#define N_KEYS 7
+/* Tamanho de uma página de disco; */
+#define CLUSTER 60
 
 typedef struct NODE NODE;
 typedef struct B_TREE B_TREE;
