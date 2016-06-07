@@ -230,6 +230,7 @@ int insert_page (B_TREE *b, NODE *n) {
 	if (b == NULL || n == NULL) return INVALID_ARGUMENT;
 
 	int i;
+	int32_t zero = 0;
 	FILE *f = fopen (b->filename, "r+");
 	if (f == NULL) return ALLOCATION;
 
@@ -242,7 +243,8 @@ int insert_page (B_TREE *b, NODE *n) {
 	/*   - ID da chave  */
 	/*   - RRN da chave */
 	/* - Filhos         */
-	/* Total de bytes a serem inseridos: CLUSTER */
+	/* - 4 zeros        */
+	/* Total de bytes a serem inseridos: CLUSTER + 4 */
 	/* Inserindo o RRN da página; */
 	fwrite (&(n->rrn), sizeof (int16_t), 1, f);
 
@@ -256,6 +258,9 @@ int insert_page (B_TREE *b, NODE *n) {
 	for (i = 0; i < N_KEYS + 1; i++) {
 		fwrite (&(n->sons[i]), sizeof (int16_t), 1, f);
 	}
+
+	/* Para completar a página de disco de 64 bytes, gravamos 0 nos 4 bytes restantes; */
+	fwrite (&zero, sizeof (int32_t), 1, f);
 
 	fclose (f);
 
