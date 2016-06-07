@@ -132,7 +132,7 @@ void print_error_by_code (int err_code) {
  * TODO
  *
  * Parâmetros: 	b - arvore b*
- 				name - 
+ 				name - nome do arquivo
  *
  * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
  * se encontram descritos no arquivo err_msg.h na pasta includes.
