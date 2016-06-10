@@ -559,7 +559,7 @@ int insert_in_header (B_TREE *b, KEY k) {
 	}
 }
 
-int search_item (B_TREE *b, NODE **n, int key) {
+int search_item (B_TREE *b, int16_t * rrn, int key) {
 	if (b == NULL || key < 0) return 1;
 
 	/* Etapas a serem feitas: */
@@ -567,6 +567,38 @@ int search_item (B_TREE *b, NODE **n, int key) {
 	/* - Fazer busca sequencial no vetor de chaves */
 	/* - Ir descendo na árvore conforme há necessidade */
 	if (b->filename == NULL) return 0; /* a arvore nao possui registros; */
+
+	catch_node (b, b->header->root);
+	/*b->n;*/
+	int i;
+
+	(*rrn) = -1;
+ 
+	while (b->n != NULL && (*rrn) == -1) {
+		i = 0;
+		while (i < N_KEYS) {
+			if (b->n->keys[i].id == -1) {
+				/*pega filho da esquerda*/
+				catch_node(b ,b->n->sons[i].rrn);
+			} else if (b->n->keys[i].id > key) {
+				i--;
+				/*pega filho da direita*/
+				catch_node(b, b->n->sons[i].rrn);
+			} else if (b->n->keys[i].id == key) {
+				(*rrn) = b->n->rrn;
+			}
+			i++;
+		}
+		if ((*rrn) == -1) {
+			catch_node(b , b->n->sons[i].id);
+		}
+	}
+
+	if ((*rrn) == -1) {
+		/*nao tem essa key*/
+		return -1;
+	}
+	return 1;/*ver saidas de erro*/
 }
 
 /**

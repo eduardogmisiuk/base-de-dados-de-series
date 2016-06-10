@@ -141,12 +141,18 @@ void destroy_file (SERIES_DATABASE **db) {
  */
 int search_series(SERIES_DATABASE* db) {
 	// ID que a pessoa deseja buscar;
+	B_TREE* b_tree = NULL;
+	create_tree (db->name, &b_tree);
+	int rrn;
+
 	int id;
 	char c;
 	int error;
 
 	scanf ("%d", &id);
     getc (stdin);
+
+    
 
 	db->file = fopen (db->name, "r");
 	if (db->file == NULL) {
@@ -155,8 +161,6 @@ int search_series(SERIES_DATABASE* db) {
         return OPENING_FILE;
 
 	}
-	else
-		rewind (db->file);
 
 	if (db->s != NULL) remove_serie (&db->s);
 	error = create_serie (&db->s);
@@ -168,47 +172,9 @@ int search_series(SERIES_DATABASE* db) {
 
 	}
 
-	while (!feof (db->file) && fread (&(db->s->idSerie) , ID_SIZE, 1, db->file)) {
+	search_item (b_tree, &rrn, id);
 
-		// Caso o ID que foi pega seja o que estamos procurando;
-		if (db->s->idSerie == id) {
-
-			// Lendo as informações da série;
-			fread (db->s->producao, PRODUCAO_SIZE, 1, db->file);
-			fread (&(db->s->anoLancamento), ANO_SIZE, 1, db->file);
-			fread (&(db->s->temporada), TEMPORADA_SIZE, 1, db->file);
-
-			db->s->tituloSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
-			db->s->descSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
-			db->s->generoSerie = str_read (db->file, FIELD_SEPARATOR, -1, -1, -1);
-
-			db->s->titulo_size = strlen (db->s->tituloSerie) + 1;
-			db->s->desc_size = strlen (db->s->descSerie) + 1;
-			db->s->genero_size = strlen (db->s->generoSerie) + 1;
-
-			// Imprimindo a série encontrada;
-			printf ("________________________________________________\n");
-			print_serie (db->s);
-			printf ("\n");
-			remove_serie (&db->s);
-
-			// Fechando o arquivo;
-			fclose (db->file);
-			db->file = NULL;
-
-			// Operação funcionou!
-			return 0;
-
-		}
-
-		// O while aqui só irá até o final do registro;
-		else {
-			// Pulando os campos de tamanho fixo;
-			fseek (db->file, PRODUCAO_SIZE+ANO_SIZE+TEMPORADA_SIZE, SEEK_CUR);
-			while (!feof (db->file) && (c = fgetc (db->file)) != REGISTER_SEPARATOR) continue;
-		}
-
-	}
+	fseek(db->file, rrn*(sizeof(SERIE)), SEEK_SET);
 
 	fclose(db->file);
 	db->file = NULL;
