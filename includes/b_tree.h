@@ -70,7 +70,7 @@ int insert_item (B_TREE *b, NODE *n);
  * Retorno: o retorno é somente para erros. Os erros possíveis para todas as funções
  * se encontram descritos no arquivo err_msg.h na pasta includes.
  */
-int search_item (B_TREE *b, NODE **item, int id);
+int search_item (B_TREE *b, int16_t * rrn, int key);
 
 /**
  * Desaloca a memória utilizada pela árvore B*.
